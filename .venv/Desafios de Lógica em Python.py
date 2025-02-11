@@ -1,3 +1,8 @@
+"""
+Eu solicitei alguns desafios para treinar python no Chat GPT e ele me passou alguns
+"""
+
+
 #Escreva um programa que peça um número ao usuário e informe se ele é par ou ímpar.
 
 def par_ou_impar():
