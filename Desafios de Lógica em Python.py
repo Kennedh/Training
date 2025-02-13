@@ -80,5 +80,12 @@ def fibonacci():
 def ordena_lista(lista):
     return sorted(lista)
 
-lista = [2,6,8,1,2,8,6,9,7,5,21]
-print(f"Lista ordenada: {ordena_lista(lista)}")
+
+# Escreva um programa que peça uma string e a exiba invertida.
+
+def inverte_string():
+    palavra = input("Escreva uma palavra: ")
+    s = palavra[::-1]
+    print(s)
+
+inverte_string()
