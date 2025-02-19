@@ -12,7 +12,7 @@
 notas = []
 
 def adicionar_nota():
-    print("Digite uma nota: ")
+    print("Digite a nota: ")
     notas.append(input())
 
 def remover_nota():
@@ -35,7 +35,9 @@ while True:
     print("1 - Adicionar nota")
     print("2 - Remover nota")
     print("3 - Calcular média")
-    print("4 - Sair")
+    print("4 - Consultar notas")
+    print("5 - Sair")
+
     opcao = int(input())
     if opcao == 1:
         adicionar_nota()
@@ -44,6 +46,8 @@ while True:
     if opcao == 3:
         calcular_media()
     if opcao == 4:
+        print(f"Notas digitadas: {notas}")
+    if opcao == 5:
         break
-    if opcao > 4:
+    if opcao > 5:
         print("Opção incorreta!")
