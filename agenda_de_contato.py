@@ -14,13 +14,34 @@ agenda = {}
 def adicionar_contato():
     nome = input("Digite o nome do contato: ")
     numero = input("Digite o número do contato: ")
-    agenda[nome] = numero
+    agenda[nome.lower()] = numero
 
+def buscar_contato():
+    contato = input("Digite o nome para buscar: ")
+    consulta = agenda.get(contato, "Contato não encontrado")
+    print(consulta)
 
+def listar_contatos():
+    print(agenda)
 
-adicionar_contato()
-adicionar_contato()
+print("""Agenda de contatos
+        
+        --------------------
+        """)
 
-print(agenda)
-
-
+while True:
+    print("""1 - Adicionar contato
+2 - Buscar contato
+3 - Listar contatos
+4 - Sair""")
+    opcao = int(input())
+    if opcao == 1:
+        adicionar_contato()
+    elif opcao == 2:
+        buscar_contato()
+    elif opcao == 3:
+        listar_contatos()
+    elif opcao == 4:
+        break
+    else:
+        print("Opção incorreta!")
