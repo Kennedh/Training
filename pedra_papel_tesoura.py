@@ -26,7 +26,7 @@ def verificar_vencedor(valor2):
         print("Computador ganhou!")
     elif valor1 == valor2:
         print("Empate!")
-    elif valor2 != "pedra" or "papel" or "tesoura":
+    elif valor2 != "pedra" or valor2 != "papel" or valor2 != "tesoura":
         print("Escolha incorreta")
     else:
         print("Você ganhou!")
