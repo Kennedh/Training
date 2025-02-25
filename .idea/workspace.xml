@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7065775-a90b-45f7-95cb-b432dcf420df" name="Changes" comment="inverte_string">
-      <change afterPath="$PROJECT_DIR$/jogo_da_forca.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f7065775-a90b-45f7-95cb-b432dcf420df" name="Changes" comment="Create analisador_de_notas">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_02_2025_22_54_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_02_2025_22_54__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +48,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.Desafios de Lógica em Python.executor": "Run",
+    "Python.analisador_de_notas.executor": "Run",
+    "Python.gerenciador_de_notas.executor": "Run",
+    "Python.gerenciador_de_tarefas.executor": "Run",
     "Python.jogo_da_forca.executor": "Run",
+    "Python.pedra_papel_tesoura.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -57,8 +61,8 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.jogo_da_forca">
-    <configuration name="Desafios de Lógica em Python" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.analisador_de_notas">
+    <configuration name="analisador_de_notas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Training" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -71,7 +75,51 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Desafios de Lógica em Python.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analisador_de_notas.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gerenciador_de_notas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Training" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gerenciador_de_notas.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gerenciador_de_tarefas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Training" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gerenciador_de_tarefas.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -102,10 +150,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="pedra_papel_tesoura" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Training" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pedra_papel_tesoura.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.analisador_de_notas" />
+        <item itemvalue="Python.gerenciador_de_tarefas" />
+        <item itemvalue="Python.pedra_papel_tesoura" />
+        <item itemvalue="Python.gerenciador_de_notas" />
         <item itemvalue="Python.jogo_da_forca" />
-        <item itemvalue="Python.Desafios de Lógica em Python" />
       </list>
     </recent_temporary>
   </component>
@@ -173,13 +246,112 @@
       <option name="project" value="LOCAL" />
       <updated>1739411661767</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Jogo da Forca">
+      <option name="closed" value="true" />
+      <created>1739534676398</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739534676398</updated>
+    </task>
+    <task id="LOCAL-00008" summary=".">
+      <option name="closed" value="true" />
+      <created>1739534691664</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739534691665</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Caixa eletronico">
+      <option name="closed" value="true" />
+      <created>1739535208324</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1739535208324</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1739997680537</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739997680537</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: Adicionado funções de adicionar / remover notas e calcular média">
+      <option name="closed" value="true" />
+      <created>1740003963219</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1740003963219</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: Adicionado função consulta">
+      <option name="closed" value="true" />
+      <created>1740009248318</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740009248318</updated>
+    </task>
+    <task id="LOCAL-00013" summary="pedra, papel, tesoura">
+      <option name="closed" value="true" />
+      <created>1740179256787</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740179256787</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ajuste nas condições">
+      <option name="closed" value="true" />
+      <created>1740179467289</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1740179467289</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Create gerenciador_de_tarefas">
+      <option name="closed" value="true" />
+      <created>1740335652077</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1740335652077</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Update gerenciador_de_tarefas">
+      <option name="closed" value="true" />
+      <created>1740338136284</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1740338136284</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Create analisador_de_notas">
+      <option name="closed" value="true" />
+      <created>1740501145110</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1740501145110</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Desafios de logica criados" />
     <MESSAGE value="Desafios de logica" />
     <MESSAGE value="inverte_string" />
-    <option name="LAST_COMMIT_MESSAGE" value="inverte_string" />
+    <MESSAGE value="Jogo da Forca" />
+    <MESSAGE value="." />
+    <MESSAGE value="Caixa eletronico" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="feat: Adicionado funções de adicionar / remover notas e calcular média" />
+    <MESSAGE value="feat: Adicionado função consulta" />
+    <MESSAGE value="pedra, papel, tesoura" />
+    <MESSAGE value="ajuste nas condições" />
+    <MESSAGE value="Create gerenciador_de_tarefas" />
+    <MESSAGE value="Update gerenciador_de_tarefas" />
+    <MESSAGE value="Create analisador_de_notas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create analisador_de_notas" />
   </component>
 </project>
