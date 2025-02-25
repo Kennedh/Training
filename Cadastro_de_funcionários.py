@@ -18,7 +18,7 @@ menu = """
 [4] Sair
 ------------------------------------------
 """
-relatorio = ""
+
 lista = []
 num_funcionarios = 0
 
