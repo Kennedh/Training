@@ -8,28 +8,54 @@ Crie outra função chamada exibir_relatorio(), que exibe a lista de funcionári
 Permita que o usuário adicione vários funcionários e depois visualize o relatório.
 """
 
-funcionarios = ""
+menu = """
+
+ Cadastro de Funcionários 
+-----------------------------------------
+[1] Adicionar Funcionário
+[2] Remover Funcionário
+[3] Relatorio de funcionários cadastrados
+------------------------------------------
+"""
+relatorio = ""
+lista = []
 num_funcionarios = 0
 
-def adicionar_funcionario(nome, idade, cargo, salario):
-    global funcionarios
+def adicionar_funcionario():
+    global relatorio
     global num_funcionarios
+    dicio = {}
+    global lista
     num_funcionarios += 1
-    funcionarios += f"Nome: {nome} | Idade: {idade} | Cargo: {cargo} | Salário: R$ {salario}\n"
+    dicio["Código"] = num_funcionarios
+    nome = input("Nome do funcionário: ")
+    dicio["Nome"] = nome
+    idade = input("Idade: ")
+    dicio["Idade"] = idade
+    cargo = input("Cargo: ")
+    dicio["Cargo"] = cargo
+    salario = input("Salário: ")
+    dicio["Salário"] = salario
+    print("\nFuncionário cadastrado com sucesso!")
+    lista.append(dicio)
+    relatorio += f"Nome: {nome} | Idade: {idade} | Cargo: {cargo} | Salário: R$ {salario}\n"
 
 def exibir_relatorio():
-    global funcionarios
+    global relatorio
     global num_funcionarios
     print("Lista de Funcionários:")
     print("----------------------")
-    print(funcionarios)
+    print(relatorio)
     print("----------------------")
     print(f"Total de funcionários cadastrados: {num_funcionarios}")
 
-
-
-adicionar_funcionario("Carlos", 30, "Analista", 4500)
-adicionar_funcionario("Ana", 25, "Desenvolvedora", 5500)
-adicionar_funcionario("Marcos", 40, "Gerente", 7500)
-
-exibir_relatorio()
+while True:
+    opcao = input(menu)
+    if opcao == "1":
+        adicionar_funcionario()
+    elif opcao == "2":
+        remover_funcionario()
+    elif opcao == "3":
+        exibir_relatorio()
+    else:
+        print("Opção incorreta!")
