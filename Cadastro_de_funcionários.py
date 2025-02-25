@@ -15,6 +15,7 @@ menu = """
 [1] Adicionar Funcionário
 [2] Remover Funcionário
 [3] Relatorio de funcionários cadastrados
+[4] Sair
 ------------------------------------------
 """
 relatorio = ""
@@ -57,5 +58,7 @@ while True:
         remover_funcionario()
     elif opcao == "3":
         exibir_relatorio()
+    elif opcao == "4":
+        break
     else:
         print("Opção incorreta!")
