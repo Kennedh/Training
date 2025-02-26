@@ -27,7 +27,6 @@ def adicionar_funcionario():
     global num_funcionarios
     dicio = {}
     global lista
-    num_funcionarios += 1
     nome = input("Nome do funcionário: ")
     dicio["Nome"] = nome
     idade = input("Idade: ")
@@ -40,7 +39,6 @@ def adicionar_funcionario():
     lista.append(dicio)
 
 def exibir_relatorio():
-    global relatorio
     global num_funcionarios
     global lista
     print("Lista de Funcionários:")
@@ -55,7 +53,6 @@ def remover_funcionario():
     global num_funcionarios
     op = int(input("Digite o código do funcionário que deseja excluir: "))
     lista.pop(op-1)
-    num_funcionarios -= 1
 
 while True:
     opcao = input(menu)
