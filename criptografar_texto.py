@@ -2,25 +2,41 @@
 Faça uma função que criptografe um texto em que transforme as letras nas suas respectivas posições no alfabeto
 """
 
+alfabeto_extenso = "abcdefghijklmnopqrstuvxwyz"
+alfabeto = list(alfabeto_extenso)
+criptografado = []
+
 def criptograf_texto(texto):
-    alfabeto_extenso = "abcdefghijklmnopqrstuvxwyz"
+    global alfabeto
+    global criptografado
     alfabeto = list(alfabeto_extenso)
-    criptografado = ""
     lista = list(texto)
     for letra in lista:
         if letra == " ":
-            criptografado += "0"
+            criptografado.append(0)
         else:
-            criptografado += str(alfabeto.index(letra)+1)
-    return criptografado
+            criptografado.append(alfabeto.index(letra)+1)
 
+
+def descriptograf_texto(texto):
+    retorno = ""
+    global alfabeto
+    global criptografado
+    for xar in criptografado:
+        retorno += str(alfabeto[xar-1])
+    print(retorno)
 
 aalfabeto_extenso = "abcdefghijklmnopqrstuvxwyz"
 aalfabeto = list(aalfabeto_extenso)
 
-print(criptograf_texto("kennedh"))
+criptograf_texto("kennedh")
 
-print(aalfabeto.index("n")+1)
+print(criptografado)
+
+descriptograf_texto(criptografado)
+
+
+# print(aalfabeto.index("n")+1)
 
 # 1151414548
 
