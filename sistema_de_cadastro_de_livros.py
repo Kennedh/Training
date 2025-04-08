@@ -38,16 +38,28 @@ class Biblioteca:
     def listar_livros(self):
         for livro, (autor, ano) in self.livros.items():
             print(f"{livro} - Autor: {autor}, Ano: {ano}")
+        print("\n")
+
+    def pesquisar_por_autor(self, autorr):
+        for livro, (autor, ano) in self.livros.items():
+            if autorr in autor:
+                print(f"{livro} - Autor: {autor}, Ano: {ano}")
+        print("\n")
+
+    def remover_livro(self, livroo):
+        self.livros.pop(livroo)
 
 livro1 = Livro("Uma Breve História do Tempo", "Stephen Hawking", 1988)
 livro2 = Livro("George e o Segredo do Universo", "Christophe Galfard, Lucy Hawking e Stephen Hawking", 2007)
-
+livro3 = Livro("Dom Casmurro", "Machado de Assis", 1899)
 
 
 biblioteca = Biblioteca({})
 biblioteca.adicionar_livro(livro1)
 biblioteca.adicionar_livro(livro2)
+biblioteca.adicionar_livro(livro3)
 biblioteca.listar_livros()
+biblioteca.pesquisar_por_autor("Machado de Assis")
+biblioteca.remover_livro("Dom Casmurro")
 
-#biblioteca.pesquisar_por_autor("Machado de Assis")
-#biblioteca.remover_livro("Dom Casmurro")
+biblioteca.listar_livros()
