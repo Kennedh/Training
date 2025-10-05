@@ -39,11 +39,15 @@ FizzBuzz
 def fizz_buzz(n):
     res = ["1"]
     for i in range(1,n + 1):
-        if i % 3 == 0 or i % 5 == 0:
+        if i % 3 == 0 and i % 5 == 0:
+            res.append("FizzBuzz")
+        elif i % 3 == 0:
             res.append("Fizz")
+        elif i % 5 == 0:
+            res.append("Buzz")
         else:
             res.append(str(i))
-    return "\n".join(res) + "Buzz" if res[-1] == "Fizz" else "\n".join(res)
+    return "\n".join(res)
 
 # Teste
 
