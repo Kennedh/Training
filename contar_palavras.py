@@ -24,13 +24,17 @@ Python
 {'olá': 2, 'mundo': 2, 'este': 1, 'é': 1, 'um': 1, 'teste': 1, 'novamente': 1}
 """
 
-def contar_palavras():
+def contar_palavras(caminho):
     res = {}
-    with open("texto_desafio.txt") as t:
-        palavras = t.read().split(" ")
-        for palavra in set(palavras):
-            res[palavra] = palavras.count(palavra)
-    return res
+    with open(caminho) as t:
+        p = t.read()
+        palavras = p.lower().split(" ")
 
-print(contar_palavras())
+    for palavra in palavras:
+        res[palavra] = res.get(palavra, 0) + 1
+
+    lista_ordenada = sorted(res.items(),key=lambda item: item[1], reverse=True)
+    return dict(lista_ordenada)
+
+print(contar_palavras("texto_desafio.txt"))
 
