@@ -38,8 +38,28 @@ def calcula_venda(vendas):
     total_itens = 0
     faturamento = 0
     produtos_unicos = []
+    mais_vendido = {}
+    res = {}
 
     for venda in vendas:
-        temp = [a for a in venda]
+        total_itens += venda.get("quantidade")
+        faturamento += venda.get("quantidade") * venda.get("valor_unitario")
+        produtos_unicos.append(venda.get("produto"))
+        mais_vendido[venda.get("produto")] = venda.get("quantidade")
+
+    res["total_itens"] = total_itens
+    res["faturamento"] = faturamento
+    res["produtos_unicos"] = set(produtos_unicos)
+    res["mais_vendido"] = sorted(mais_vendido, reverse=True)[0]
+
+    return res
 
 # Teste
+
+print(calcula_venda(vendas = [
+    {"produto": "maçã", "quantidade": 10, "valor_unitario": 2.5},
+    {"produto": "banana", "quantidade": 5, "valor_unitario": 3.0},
+    {"produto": "maçã", "quantidade": 4, "valor_unitario": 2.5}
+]))
+
+
