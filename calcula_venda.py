@@ -36,23 +36,31 @@ O que você deve devolver
 
 def calcula_venda(vendas):
     total_itens = 0
-    faturamento = 0
-    produtos_unicos = []
-    mais_vendido = {}
-    res = {}
+    faturamento = 0.0
+    produtos_unicos = set()
+    contagem_por_produto = {}
 
     for venda in vendas:
-        total_itens += venda.get("quantidade")
-        faturamento += venda.get("quantidade") * venda.get("valor_unitario")
-        produtos_unicos.append(venda.get("produto"))
-        mais_vendido[venda.get("produto")] = venda.get("quantidade")
+        produto = venda.get("produto")
+        qtd = venda.get("quantidade")
+        valor = venda.get("valor_unitario")
+        total_itens += qtd
+        faturamento += qtd * valor
+        produtos_unicos.add(produto)
 
-    res["total_itens"] = total_itens
-    res["faturamento"] = faturamento
-    res["produtos_unicos"] = set(produtos_unicos)
-    res["mais_vendido"] = sorted(mais_vendido, reverse=True)[0]
+        if produto in contagem_por_produto:
+            contagem_por_produto[produto] += qtd
+        else:
+            contagem_por_produto[produto] = qtd
 
-    return res
+    produto_campeao = max(contagem_por_produto, key=contagem_por_produto.get)
+
+    return {
+        "total_itens": total_itens,
+        "faturamento": faturamento,
+        "produtos_unicos": produtos_unicos,
+        "mais_vendido": produto_campeao
+    }
 
 # Teste
 
