@@ -14,28 +14,26 @@ Entrada,Saída Esperada,Motivo
 
 """
 
+
 def valida_exp(texto):
-    f = False
     temp = []
-    abre = ["{","[","("]
-    fecha = ["}","]",")"]
+    abre = ["{", "[", "("]
     pares = {')': '(', ']': '[', '}': '{'}
-    if texto[0] not in abre:
+
+    if not texto or texto[0] in pares:
         return False
+
     for simbol in texto:
-        if simbol in abre and f:
+        if simbol in abre:
             temp.append(simbol)
-        else:
+        elif simbol in pares:
             if temp:
-                ultimo = temp[len(temp) - 1]
-            else:
-                break
-            f = True
-            if pares.get(simbol) == ultimo:
-                temp.pop()
+                ultimo = temp.pop()
+                if pares[simbol] != ultimo:
+                    return False
             else:
                 return False
-    return True
+    return len(temp) == 0
 
 
 print(valida_exp("{[()]}"))
