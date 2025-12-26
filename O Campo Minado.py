@@ -41,12 +41,26 @@ def calcular_dicas(matriz):
 
     resultado = [linha[:] for linha in matriz]
 
+    direcoes = [
+        (-1, -1), (-1, 0), (-1, 1),
+        (0, -1), (0, 1),
+        (1, -1), (1, 0), (1, 1)
+    ]
+
     for i in range(linhas):
         for j in range(colunas):
             if matriz[i][j] == 9:
                 continue
 
             bombas_ao_redor = 0
+
+            for dx, dy in direcoes:
+                novo_i, novo_j = i + dx, j + dy
+
+                if 0 <= novo_i < linhas and 0 <= novo_j < colunas:
+                    if matriz[novo_i][novo_j] == 9:
+                        bombas_ao_redor += 1
+
             resultado[i][j] = bombas_ao_redor
 
     return resultado
