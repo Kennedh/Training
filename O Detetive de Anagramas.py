@@ -14,7 +14,10 @@ def sao_anagramas(s1, s2):
             s2.remove(letra)
         else:
             return False
-    return True
+    if not s2:
+        return True
+    else:
+        return False
 
 # Teste
 
