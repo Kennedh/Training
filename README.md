@@ -6,4 +6,4 @@ Este repositório contém meus treinos diários de Python, abrangendo desde conc
 
 - Melhorar minha fluência em Python
 - Desenvolver projetos pequenos e médios
-- Preparar-me para desafios de programação e entrevistas técnicas
+- Preparar-me para desafios de programação
