@@ -52,7 +52,7 @@ def converter_imagens(diretorio_origem, diretorio_destino, um_arquivo_so=True):
         nome_final = os.path.join(diretorio_destino, "unificado.pdf")
         # O truque da Pillow: salva a primeira e anexa o resto
         primeira = imagens_processadas.pop(0)
-        primeira.save(nome_final, save_all=True, append_images=imagens_processadas)
+        primeira.save(nome_final, save_all=True, append_images=imagens_processadas, optimize=True, quality=40)
         print(f"\nSucesso! PDF único gerado em: {nome_final}")
 
     elif not um_arquivo_so:
