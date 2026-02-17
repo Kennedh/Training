@@ -4,58 +4,64 @@ CONVERSOR DE IMAGENS NUMA PASTA PARA PDF
 DEIXEI EXPLICADO A CADA PONTO PARA FICAR CLARO NA REVISÃO
 
 """
-
 import os
 from PIL import Image
 
 
-def converter_imagens_para_pdf(diretorio_origem, diretorio_destino):
-    # Verifica se a pasta de destino existe, se não, cria
+def converter_imagens(diretorio_origem, diretorio_destino, um_arquivo_so=True):
+    """
+    Converte imagens para PDF.
+    :param um_arquivo_so: Se True, gera um único PDF com todas as imagens.
+                          Se False, gera um PDF para cada imagem.
+    """
     if not os.path.exists(diretorio_destino):
         os.makedirs(diretorio_destino)
 
-    # Extensões de imagem aceitas
     extensoes_validas = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff')
 
-    # Lista todos os arquivos no diretório
-    arquivos = os.listdir(diretorio_origem)
+    # Filtra e ordena os arquivos (importante para o PDF único não vir bagunçado)
+    arquivos = [f for f in os.listdir(diretorio_origem) if f.lower().endswith(extensoes_validas)]
+    arquivos.sort()
 
-    print(f"Iniciando conversão de imagens em: {diretorio_origem}...\n")
+    if not arquivos:
+        print("Nenhuma imagem encontrada.")
+        return
 
-    count = 0
+    print(f"Iniciando processamento de {len(arquivos)} imagens...")
+
+    imagens_processadas = []
+
     for arquivo in arquivos:
-        # Verifica se o arquivo termina com uma extensão de imagem válida
-        if arquivo.lower().endswith(extensoes_validas):
-            caminho_completo = os.path.join(diretorio_origem, arquivo)
+        caminho_img = os.path.join(diretorio_origem, arquivo)
+        try:
+            img = Image.open(caminho_img).convert('RGB')
 
-            try:
-                # 1. Abre a imagem
-                imagem = Image.open(caminho_completo)
+            if um_arquivo_so:
+                imagens_processadas.append(img)
+            else:
+                # Salva individualmente na hora
+                nome_pdf = os.path.splitext(arquivo)[0] + ".pdf"
+                img.save(os.path.join(diretorio_destino, nome_pdf))
+                print(f"Individual: {arquivo} -> {nome_pdf}")
 
-                # 2. Converte para RGB
-                # (Essencial para converter PNGs transparentes para PDF, senão dá erro)
-                imagem = imagem.convert('RGB')
+        except Exception as e:
+            print(f"Erro em {arquivo}: {e}")
 
-                # 3. Define o nome do novo arquivo PDF
-                nome_sem_extensao = os.path.splitext(arquivo)[0]
-                nome_pdf = f"{nome_sem_extensao}.pdf"
-                caminho_pdf = os.path.join(diretorio_destino, nome_pdf)
+    # Se a opção for arquivo único, salva a lista acumulada aqui
+    if um_arquivo_so and imagens_processadas:
+        nome_final = os.path.join(diretorio_destino, "unificado.pdf")
+        # O truque da Pillow: salva a primeira e anexa o resto
+        primeira = imagens_processadas.pop(0)
+        primeira.save(nome_final, save_all=True, append_images=imagens_processadas)
+        print(f"\nSucesso! PDF único gerado em: {nome_final}")
 
-                # 4. Salva como PDF
-                imagem.save(caminho_pdf)
-                print(f"Convertido: {arquivo} -> {nome_pdf}")
-                count += 1
-
-            except Exception as e:
-                print(f"Erro ao converter {arquivo}: {e}")
-
-    print(f"\nSucesso! Total de {count} imagens convertidas.")
+    elif not um_arquivo_so:
+        print(f"\nSucesso! {len(arquivos)} PDFs individuais gerados.")
 
 
 # --- Configuração ---
-# Substitua pelo caminho da sua pasta de imagens
-pasta_entrada = "C:\pdf"
-pasta_saida = "C:\pdf-feito"
+pasta_entrada = r"C:\pdf"
+pasta_saida = r"C:\pdf-feito"
 
-# Executa a função
-converter_imagens_para_pdf(pasta_entrada, pasta_saida)
+# Escolha: True para um PDF só, False para vários
+converter_imagens(pasta_entrada, pasta_saida, um_arquivo_so=True)
