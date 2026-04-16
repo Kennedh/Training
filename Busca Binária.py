@@ -15,21 +15,16 @@ O número do meio é menor que o alvo? Jogue a metade da esquerda fora.
 
 Repita.
 """
+import bisect
 
-
-def busca_binaria(nums, target):
-    esquerda = 0
-    direita = len(nums) - 1
-    while esquerda <= direita:
-        meio = (esquerda + direita) // 2
-        chute = nums[meio]
-        if chute == target:
-            return meio
-        elif chute > target:
-            direita = meio - 1
-        else:
-            esquerda = meio + 1
+def busca_binaria_bisect(nums, target):
+  
+    indice = bisect.bisect_left(nums, target)
+    
+    if indice != len(nums) and nums[indice] == target:
+        return indice
     return -1
+
 
 
 # --- TESTES ---
