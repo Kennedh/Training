@@ -1,4 +1,6 @@
 import customtkinter as ctk
+import banco
+from tkinter import messagebox
 
 ctk.set_appearance_mode("system")
 ctk.set_default_color_theme("blue")
@@ -11,6 +13,10 @@ class Login(ctk.CTk):
         self.title("Tela de Login")
         self.geometry("1024x768")
         self.minsize(600,400)
+
+        # Banco
+
+        self.banco = banco.Banco()
 
         # Bloco de login
 
@@ -54,15 +60,15 @@ class Login(ctk.CTk):
         self.campo_cad_user = ctk.CTkEntry(self.frame_cadastro, placeholder_text="Usuário para entrar")
         self.campo_cad_user.pack(pady=10, padx=20)
 
-        self.campo_cad_senha = ctk.CTkEntry(self.frame_cadastro, placeholder_text="Nova Senha")
+        self.campo_cad_senha = ctk.CTkEntry(self.frame_cadastro, placeholder_text="Nova Senha", show="*")
         self.campo_cad_senha.pack(pady=10, padx=20)
 
-        self.campo_conf_senha = ctk.CTkEntry(self.frame_cadastro, placeholder_text="Confime a senha")
+        self.campo_conf_senha = ctk.CTkEntry(self.frame_cadastro, placeholder_text="Confime a senha", show="*")
         self.campo_conf_senha.pack(pady=10, padx=20)
 
         # Botões
 
-        self.btn_salvar_cad = ctk.CTkButton(self.frame_cadastro, text="Salvar Cadastro")
+        self.btn_salvar_cad = ctk.CTkButton(self.frame_cadastro, text="Salvar Cadastro", command=self.salvar_cadastro)
         self.btn_salvar_cad.pack(pady=10, padx=20)
 
         self.btn_voltar = ctk.CTkButton(self.frame_cadastro, text="Voltar", command=self.volta_para_login)
@@ -81,3 +87,22 @@ class Login(ctk.CTk):
         password = self.campo_senha.get()
         print(f"Usuário e senha digitados")
         print(f"Usuário:{user} Senha:{password}")
+
+    def salvar_cadastro(self):
+        nome = self.campo_cad_nome.get()
+        email = self.campo_cad_email.get()
+        usuario = self.campo_cad_user.get()
+        senha = self.campo_cad_senha.get()
+        conf_senha = self.campo_conf_senha.get()
+
+        if senha != conf_senha:
+             return messagebox.showerror("Erro", "Senhas não coincidem!")
+
+        resultado = self.banco.inserir_usuario(nome,email,usuario,senha)
+
+        if resultado == "Usuário Cadastrado":
+            messagebox.showinfo("Sucesso", resultado)
+            self.frame_cadastro.place_forget()
+            self.frame_login.place(relx=0.5, rely=0.5, anchor="center")
+        else:
+            messagebox.showerror("Erro", resultado)

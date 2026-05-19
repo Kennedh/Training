@@ -10,8 +10,8 @@ class Banco:
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS usuarios(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT UNIQUE,
-            email text,
+            nome TEXT,
+            email TEXT UNIQUE,
             usuario TEXT UNIQUE,
             senha text
         )""")
@@ -23,5 +23,9 @@ class Banco:
                            (nome, email, usuario, senha))
             self.conexao.commit()
             return "Usuário Cadastrado"
-        except sqlite3.IntegrityError:
-            return "Usuário não cadastrado"
+        except sqlite3.IntegrityError as erro:
+            msg_error = str(erro)
+            if "usuario" in msg_error:
+                return "Este usuário já está cadastrado!"
+            if "email" in msg_error:
+                return "Este e-mail já está cadastrado!"
