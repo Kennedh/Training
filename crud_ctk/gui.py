@@ -85,8 +85,15 @@ class Login(ctk.CTk):
     def valida_login(self):
         user = self.campo_user.get()
         password = self.campo_senha.get()
-        print(f"Usuário e senha digitados")
-        print(f"Usuário:{user} Senha:{password}")
+
+        # Validação no banco
+
+        resultado = self.banco.valida_login(user, password)
+
+        if resultado is None:
+            return messagebox.showerror("Erro", "Nome de usuário ou senha incorretos")
+        else:
+            return messagebox.showinfo("Sucesso", f"Bem-Vindo {resultado[1]}")
 
     def salvar_cadastro(self):
         nome = self.campo_cad_nome.get()

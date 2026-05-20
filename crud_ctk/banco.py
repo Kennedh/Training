@@ -29,3 +29,11 @@ class Banco:
                 return "Este usuário já está cadastrado!"
             if "email" in msg_error:
                 return "Este e-mail já está cadastrado!"
+
+    def valida_login(self,usuario,senha):
+        self.cursor.execute("""
+        SELECT * FROM usuarios
+        WHERE usuario = ? and senha = ?
+        """,(usuario, senha))
+        resultado = self.cursor.fetchone()
+        return resultado
