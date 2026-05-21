@@ -16,6 +16,15 @@ class Banco:
             senha text
         )""")
 
+        self.cursor.execute("""
+                CREATE TABLE IF NOT EXISTS tarefas(
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    descricao TEXT,
+                    concluida INTEGER,
+                    id_usuario INTEGER,
+                    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+                )""")
+
     def inserir_usuario(self, nome, email, usuario, senha):
         try:
             self.cursor.execute("INSERT INTO usuarios "
@@ -30,6 +39,16 @@ class Banco:
             if "email" in msg_error:
                 return "Este e-mail já está cadastrado!"
 
+    def inserir_tarefa(self, descricao, id_usuario):
+        try:
+            self.cursor.execute("INSERT INTO tarefas "
+                                    "(descricao, concluida, id_usuario) VALUES (?, ?, ?)",
+                           (descricao, 0, id_usuario))
+            self.conexao.commit()
+            return "Tarefa Cadastrada"
+        except sqlite3.IntegrityError as erro:
+            return str(erro)
+
     def valida_login(self,usuario,senha):
         self.cursor.execute("""
         SELECT * FROM usuarios
@@ -37,3 +56,11 @@ class Banco:
         """,(usuario, senha))
         resultado = self.cursor.fetchone()
         return resultado
+
+    def buscar_tarefas(self, id_usuario):
+        self.cursor.execute("""
+        SELECT * FROM tarefas
+         WHERE id_usuario = ? 
+        """, (id_usuario,))
+        tarefas = self.cursor.fetchall()
+        return tarefas
