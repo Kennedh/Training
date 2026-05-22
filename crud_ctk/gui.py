@@ -14,11 +14,16 @@ class Login(ctk.CTk):
         self.geometry("1024x768")
         self.minsize(600,400)
 
+        # Atributos globais
+
+        self.tarefas = []
+        self.id_usuario_logado = None
+
         # Banco
 
         self.banco = banco.Banco()
 
-        # Bloco de login
+        # ==== Bloco de login =====
 
         self.frame_login = ctk.CTkFrame(self)
         self.frame_login.place(relx=0.5, rely=0.5, anchor="center")
@@ -42,7 +47,7 @@ class Login(ctk.CTk):
         self.btn_cadastrar = ctk.CTkButton(self.frame_login, text="Cadastrar",command=self.tela_de_cadastro)
         self.btn_cadastrar.pack(pady=10, padx=20)
 
-        # Bloco de Cadastro
+        # ==== Bloco de Cadastro ====
 
         self.frame_cadastro = ctk.CTkFrame(self)
 
@@ -74,6 +79,23 @@ class Login(ctk.CTk):
         self.btn_voltar = ctk.CTkButton(self.frame_cadastro, text="Voltar", command=self.volta_para_login)
         self.btn_voltar.pack(pady=10, padx=20)
 
+        # ==== Bloco do gerenciador de tarefas ====
+
+        self.frame_tarefas = ctk.CTkFrame(self)
+
+        self.lbl_tarefas = ctk.CTkLabel(self.frame_tarefas, text="Tarefas Cadastradas")
+        self.lbl_tarefas.pack(pady=10, padx=20)
+
+        self.scroll_tarefas = ctk.CTkScrollableFrame(self.frame_tarefas, width=300, height=200)
+
+        # Campo e botão de cadastro de nova tarefa
+
+        self.campo_tarefa = ctk.CTkEntry(self.frame_tarefas, placeholder_text="Cadastrar novo tarefa")
+        self.campo_tarefa.pack(pady=10, padx=20)
+
+        self.btn_nova_tarefa = ctk.CTkButton(self.frame_tarefas, text="Cadastrar", command=self.nova_tarefa)
+        self.btn_nova_tarefa.pack(pady=10, padx=20)
+
     def tela_de_cadastro(self):
         self.frame_login.place_forget()
         self.frame_cadastro.place(relx=0.5, rely=0.5, anchor="center")
@@ -93,7 +115,9 @@ class Login(ctk.CTk):
         if resultado is None:
             return messagebox.showerror("Erro", "Nome de usuário ou senha incorretos")
         else:
-            return messagebox.showinfo("Sucesso", f"Bem-Vindo {resultado[1]}")
+            self.frame_login.place_forget()
+            messagebox.showinfo("Sucesso", f"Bem-Vindo {resultado[1]}")
+            return self.tela_de_tarefas(resultado[0])
 
     def salvar_cadastro(self):
         nome = self.campo_cad_nome.get()
@@ -113,3 +137,35 @@ class Login(ctk.CTk):
             self.frame_login.place(relx=0.5, rely=0.5, anchor="center")
         else:
             messagebox.showerror("Erro", resultado)
+
+    def tela_de_tarefas(self,id_usuario):
+        self.id_usuario_logado = id_usuario
+        self.tarefas = self.banco.buscar_tarefas(id_usuario)
+
+        self.scroll_tarefas.pack(pady=10, padx=20)
+
+        for tarefa in self.tarefas:
+            checkbox_tarefa = ctk.CTkCheckBox(self.scroll_tarefas, text=f"{tarefa[1]}")
+            checkbox_tarefa.configure(
+                command=lambda t_id=tarefa[0], check=checkbox_tarefa: self.clique_check_box(t_id, check))
+            checkbox_tarefa.pack(pady=5, anchor="w")
+            if tarefa[2] == 1:
+                checkbox_tarefa.select()
+
+        self.frame_tarefas.place(relx=0.5, rely=0.5, anchor="center")
+
+    def nova_tarefa(self):
+        tarefa = self.campo_tarefa.get()
+        id_criado = self.banco.inserir_tarefa(tarefa,self.id_usuario_logado)
+        messagebox.showinfo("Sucesso","Nova Tarefa cadastrada")
+
+        nova_tarefa = ctk.CTkCheckBox(self.scroll_tarefas, text=f"{tarefa}")
+        nova_tarefa.configure(
+                command=lambda t_id=id_criado, check=nova_tarefa: self.clique_check_box(t_id, check))
+        nova_tarefa.pack(pady=5, anchor="w")
+
+        self.campo_tarefa.delete(0, 'end')
+
+    def clique_check_box(self,id_tarefa, checkbox_clicado):
+        novo_status = checkbox_clicado.get()
+        self.banco.alterar_status_tarefa(novo_status, id_tarefa)

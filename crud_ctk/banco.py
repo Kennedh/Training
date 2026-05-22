@@ -45,7 +45,7 @@ class Banco:
                                     "(descricao, concluida, id_usuario) VALUES (?, ?, ?)",
                            (descricao, 0, id_usuario))
             self.conexao.commit()
-            return "Tarefa Cadastrada"
+            return self.cursor.lastrowid
         except sqlite3.IntegrityError as erro:
             return str(erro)
 
@@ -64,3 +64,10 @@ class Banco:
         """, (id_usuario,))
         tarefas = self.cursor.fetchall()
         return tarefas
+
+    def alterar_status_tarefa(self,novo_status, id_tarefa):
+        self.cursor.execute("""
+        UPDATE tarefas SET concluida = ? 
+        WHERE id = ?
+        """,(novo_status, id_tarefa))
+        self.conexao.commit()
