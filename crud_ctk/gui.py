@@ -93,12 +93,17 @@ class Login(ctk.CTk):
         self.campo_tarefa = ctk.CTkEntry(self.frame_tarefas, placeholder_text="Cadastrar novo tarefa")
         self.campo_tarefa.pack(pady=10, padx=20)
 
+        # Frame para os botões
+
+        self.frame_botoes = ctk.CTkFrame(self.frame_tarefas, fg_color="transparent")
+        self.frame_botoes.pack(pady=10)
+
         # Botões
 
-        self.btn_nova_tarefa = ctk.CTkButton(self.frame_tarefas, text="Cadastrar", command=self.nova_tarefa)
-        self.btn_nova_tarefa.pack(side="left",pady=10, padx=20)
+        self.btn_nova_tarefa = ctk.CTkButton(self.frame_botoes, text="Cadastrar", command=self.nova_tarefa)
+        self.btn_nova_tarefa.pack(side="left", padx=10)
 
-        self.btn_apagar_concluidas = ctk.CTkButton(self.frame_tarefas, text="Apagar Concluídas", command=self.apagar_concluidas)
+        self.btn_apagar_concluidas = ctk.CTkButton(self.frame_botoes, text="Apagar Concluídas", command=self.apagar_concluidas)
         self.btn_apagar_concluidas.pack(side="left", padx=10)
 
     def tela_de_cadastro(self):
@@ -150,10 +155,20 @@ class Login(ctk.CTk):
         self.scroll_tarefas.pack(pady=10, padx=20)
 
         for tarefa in self.tarefas:
-            checkbox_tarefa = ctk.CTkCheckBox(self.scroll_tarefas, text=f"{tarefa[1]}")
+            # Frame para cada linha pois o ctk se perde tadinho
+
+            frame_linhas = ctk.CTkFrame(self.scroll_tarefas, fg_color="transparent")
+            frame_linhas.pack(fill="x", pady=5)
+
+            checkbox_tarefa = ctk.CTkCheckBox(frame_linhas, text=f"{tarefa[1]}")
             checkbox_tarefa.configure(
                 command=lambda t_id=tarefa[0], check=checkbox_tarefa: self.clique_check_box(t_id, check))
-            checkbox_tarefa.pack(pady=5, anchor="w")
+            checkbox_tarefa.pack(side="left", pady=5)
+
+            btn_apagar = ctk.CTkButton(frame_linhas, text="Apagar",  width=50)
+            btn_apagar.configure(command=lambda id_tarefa=tarefa[0]: self.apagar_tarefa(id_tarefa))
+            btn_apagar.pack(side="right", pady=5)
+
             if tarefa[2] == 1:
                 checkbox_tarefa.select()
 
@@ -161,15 +176,15 @@ class Login(ctk.CTk):
 
     def nova_tarefa(self):
         tarefa = self.campo_tarefa.get()
-        id_criado = self.banco.inserir_tarefa(tarefa,self.id_usuario_logado)
-        messagebox.showinfo("Sucesso","Nova Tarefa cadastrada")
+        self.banco.inserir_tarefa(tarefa,self.id_usuario_logado)
 
-        nova_tarefa = ctk.CTkCheckBox(self.scroll_tarefas, text=f"{tarefa}")
-        nova_tarefa.configure(
-                command=lambda t_id=id_criado, check=nova_tarefa: self.clique_check_box(t_id, check))
-        nova_tarefa.pack(pady=5, anchor="w")
+        for widget in self.scroll_tarefas.winfo_children():
+            widget.destroy()
 
         self.campo_tarefa.delete(0, 'end')
+        self.tela_de_tarefas(self.id_usuario_logado)
+
+        return messagebox.showinfo("Sucesso","Nova Tarefa cadastrada")
 
     def clique_check_box(self,id_tarefa, checkbox_clicado):
         novo_status = checkbox_clicado.get()
@@ -177,9 +192,20 @@ class Login(ctk.CTk):
 
     def apagar_concluidas(self):
         self.banco.apagar_concluidas(self.id_usuario_logado)
-        messagebox.showinfo("Sucesso", "Tarefas concluídas foram apagadas :-)")
 
         for widget in self.scroll_tarefas.winfo_children():
             widget.destroy()
 
-        return self.tela_de_tarefas(self.id_usuario_logado)
+        self.tela_de_tarefas(self.id_usuario_logado)
+
+        return messagebox.showinfo("Sucesso", "Tarefas concluídas foram apagadas :-)")
+
+    def apagar_tarefa(self, id_tarefa):
+        self.banco.apagar_tarefa(id_tarefa)
+
+        for widget in self.scroll_tarefas.winfo_children():
+            widget.destroy()
+
+        self.tela_de_tarefas(self.id_usuario_logado)
+
+        return messagebox.showinfo("Sucesso", "Tarefas apagada")
