@@ -88,13 +88,18 @@ class Login(ctk.CTk):
 
         self.scroll_tarefas = ctk.CTkScrollableFrame(self.frame_tarefas, width=300, height=200)
 
-        # Campo e botão de cadastro de nova tarefa
+        # Campos
 
         self.campo_tarefa = ctk.CTkEntry(self.frame_tarefas, placeholder_text="Cadastrar novo tarefa")
         self.campo_tarefa.pack(pady=10, padx=20)
 
+        # Botões
+
         self.btn_nova_tarefa = ctk.CTkButton(self.frame_tarefas, text="Cadastrar", command=self.nova_tarefa)
-        self.btn_nova_tarefa.pack(pady=10, padx=20)
+        self.btn_nova_tarefa.pack(side="left",pady=10, padx=20)
+
+        self.btn_apagar_concluidas = ctk.CTkButton(self.frame_tarefas, text="Apagar Concluídas", command=self.apagar_concluidas)
+        self.btn_apagar_concluidas.pack(side="left", padx=10)
 
     def tela_de_cadastro(self):
         self.frame_login.place_forget()
@@ -169,3 +174,12 @@ class Login(ctk.CTk):
     def clique_check_box(self,id_tarefa, checkbox_clicado):
         novo_status = checkbox_clicado.get()
         self.banco.alterar_status_tarefa(novo_status, id_tarefa)
+
+    def apagar_concluidas(self):
+        self.banco.apagar_concluidas(self.id_usuario_logado)
+        messagebox.showinfo("Sucesso", "Tarefas concluídas foram apagadas :-)")
+
+        for widget in self.scroll_tarefas.winfo_children():
+            widget.destroy()
+
+        return self.tela_de_tarefas(self.id_usuario_logado)
