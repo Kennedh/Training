@@ -71,3 +71,10 @@ class Banco:
         WHERE id = ?
         """,(novo_status, id_tarefa))
         self.conexao.commit()
+
+    def apagar_concluidas(self, id_usuario):
+        self.cursor.execute("""
+        DELETE FROM tarefas
+        WHERE id_usuario = ? and concluida = 1
+        """,(id_usuario,))
+        self.conexao.commit()
