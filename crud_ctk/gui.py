@@ -181,6 +181,12 @@ class Login(ctk.CTk):
 
     def nova_tarefa(self):
         tarefa = self.campo_tarefa.get()
+
+        if not tarefa:
+            return messagebox.showwarning("Aviso", "Não é possível cadastrar\ntarefas vazias")
+        elif not tarefa.strip():
+            return messagebox.showwarning("Aviso", "Não é possível cadastrar\nsó com espaços")
+
         self.banco.inserir_tarefa(tarefa,self.id_usuario_logado)
 
         for widget in self.scroll_tarefas.winfo_children():
