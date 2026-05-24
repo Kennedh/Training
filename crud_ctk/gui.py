@@ -106,6 +106,9 @@ class Login(ctk.CTk):
         self.btn_apagar_concluidas = ctk.CTkButton(self.frame_botoes, text="Apagar Concluídas", command=self.apagar_concluidas)
         self.btn_apagar_concluidas.pack(side="left", padx=10)
 
+        self.btn_logoff = ctk.CTkButton(self.frame_botoes, text="Sair", command=self.fazer_logoff)
+        self.btn_logoff.pack(pady=10, padx=10)
+
     def tela_de_cadastro(self):
         self.frame_login.place_forget()
         self.frame_cadastro.place(relx=0.5, rely=0.5, anchor="center")
@@ -125,6 +128,8 @@ class Login(ctk.CTk):
         if resultado is None:
             return messagebox.showerror("Erro", "Nome de usuário ou senha incorretos")
         else:
+            self.campo_user.delete(0, 'end')
+            self.campo_senha.delete(0, 'end')
             self.frame_login.place_forget()
             messagebox.showinfo("Sucesso", f"Bem-Vindo {resultado[1]}")
             return self.tela_de_tarefas(resultado[0])
@@ -209,3 +214,14 @@ class Login(ctk.CTk):
         self.tela_de_tarefas(self.id_usuario_logado)
 
         return messagebox.showinfo("Sucesso", "Tarefas apagada")
+
+    def fazer_logoff(self):
+
+        for widget in self.scroll_tarefas.winfo_children():
+            widget.destroy()
+
+        self.id_usuario_logado = None
+
+        self.frame_tarefas.place_forget()
+
+        self.frame_login.place(relx=0.5, rely=0.5, anchor="center")
