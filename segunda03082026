@@ -1,0 +1,130 @@
+/**
+ * TREINO DE SEGUNDA: REVISÃO GERAL
+ * (Destructuring, Rest, Spread, forEach e for...of)
+ */
+
+// -----------------------------------------------------------------------------
+// 1. Object Destructuring + Rest
+// -----------------------------------------------------------------------------
+export function separarLicaoDiaria(licao) {
+  // TODO: O objeto 'licao' tem informações do seu estudo (idioma, tempo, xp, etc).
+  // Extraia APENAS a propriedade 'tempo' usando desestruturação.
+  // Guarde o restante no operador Rest.
+  // Retorne um array: [tempo, restoDaLicao]
+  
+  const { tempo, ...restoDaLicao } = licao;
+  return [tempo, restoDaLicao];
+}
+
+// -----------------------------------------------------------------------------
+// 2. Array Spread
+// -----------------------------------------------------------------------------
+export function juntarAcordesViolao(intro, refrao) {
+  // TODO: Você tem dois arrays com acordes de uma música.
+  // Use o Spread Operator (...) para juntar os acordes da intro e do refrão em uma lista só.
+  // Retorne o novo array.
+  
+  return [...intro, ...refrao];
+}
+
+// -----------------------------------------------------------------------------
+// 3. Iteração com .forEach
+// -----------------------------------------------------------------------------
+export function contarVitoriasLoL(historicoPartidas, resultadoBuscado) {
+  // TODO: 'historicoPartidas' é um array de strings (ex: ["Vitória", "Derrota", "Vitória"]).
+  // Use o método .forEach() para iterar sobre o array e contar quantas vezes 
+  // o 'resultadoBuscado' aparece.
+  // Retorne o número total (a contagem).
+  
+  let contagem = 0;
+  
+  historicoPartidas.forEach(partida => {
+    if (partida === resultadoBuscado) {
+      contagem++;
+    }
+  });
+  
+  return contagem;
+}
+
+// -----------------------------------------------------------------------------
+// 4. Iteração com for...of + Lógica condicional
+// -----------------------------------------------------------------------------
+export function analisarPontuacoes(pontos, buscarPares) {
+  // TODO: 'pontos' é um array de números. 'buscarPares' é um booleano (true ou false).
+  // Use um loop 'for...of' para percorrer os 'pontos'.
+  // Se 'buscarPares' for true, conte quantos números são PARES (n % 2 === 0).
+  // Se 'buscarPares' for false, conte quantos números são ÍMPARES (n % 2 !== 0).
+  // Retorne a contagem final usando apenas uma variável de resultado (como você fez no último exercício!).
+  
+  let contagem = 0;
+  
+  for (const ponto of pontos) {
+    const isPar = ponto % 2 === 0;
+    
+    if ((buscarPares && isPar) || (!buscarPares && !isPar)) {
+      contagem++;
+    }
+  }
+  
+  return contagem;
+}
+
+// =============================================================================
+// 🧪 ÁREA DE TESTES (NÃO PRECISA ALTERAR NADA DAQUI PARA BAIXO)
+// =============================================================================
+
+function runTests() {
+  let passados = 0;
+  let falhados = 0;
+
+  function assert(nome, recebido, esperado) {
+    const recStr = JSON.stringify(recebido);
+    const espStr = JSON.stringify(esperado);
+    if (recStr === espStr) {
+      console.log(`✅ PASSOU: ${nome}`);
+      passados++;
+    } else {
+      console.log(`❌ FALHOU: ${nome}`);
+      console.log(`   Esperado: ${espStr}`);
+      console.log(`   Recebido: ${recStr}`);
+      falhados++;
+    }
+  }
+
+  console.log("== INICIANDO TESTES DE SEGUNDA ==\n");
+
+  // Testes 1
+  assert("separarLicaoDiaria - isolando os 5 minutos de estudo", 
+    separarLicaoDiaria({ aplicativo: "Duolingo", idioma: "Inglês", tempo: "5 minutos", ofensiva: 245 }), 
+    ["5 minutos", { aplicativo: "Duolingo", idioma: "Inglês", ofensiva: 245 }]
+  );
+
+  // Testes 2
+  assert("juntarAcordesViolao - unindo a cifra", 
+    juntarAcordesViolao(["Em", "C"], ["G", "D"]), 
+    ["Em", "C", "G", "D"]
+  );
+
+  // Testes 3
+  assert("contarVitoriasLoL - contando as vitórias na ranqueada", 
+    contarVitoriasLoL(["Vitória", "Derrota", "Vitória", "Vitória", "Derrota"], "Vitória"), 
+    3
+  );
+
+  // Testes 4
+  assert("analisarPontuacoes - contando números pares", 
+    analisarPontuacoes([10, 15, 20, 25, 30], true), 
+    3 // (10, 20, 30)
+  );
+
+  assert("analisarPontuacoes - contando números ímpares", 
+    analisarPontuacoes([10, 15, 20, 25, 30], false), 
+    2 // (15, 25)
+  );
+
+  console.log(`\n== RESULTADO: ${passados} PASSARAM, ${falhados} FALHARAM ==`);
+}
+
+// Executa os testes automaticamente
+runTests();
