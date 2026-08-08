@@ -24,7 +24,9 @@ export function processarContrato(contrato) {
   // 2. Guarde o resto no operador Rest chamado 'detalhes'.
   // 3. Se a 'recompensa' extraída for nula ou indefinida, atribua o valor 500 (use o ?? para isso em uma nova variável, ou retorne direto).
   // Retorne um array: [alvo, recompensaFinal, detalhes]
-    
+    const {alvo, recompensa, ...detalhes} = contrato;
+    const recompensaFinal = recompensa ?? 500;
+    return [alvo, recompensaFinal, detalhes];
 }
 
 // -----------------------------------------------------------------------------
@@ -34,7 +36,7 @@ export function atualizarArsenal(armasBase, armasSaqueadas) {
   // TODO: Use Spread (...) para juntar as duas listas.
   // Adicione a arma "Mantis Blades" no INÍCIO da lista unificada.
   // Retorne o novo array.
-
+    return ["Mantis Blades" ,...armasBase, ...armasSaqueadas]
 }
 
 // -----------------------------------------------------------------------------
@@ -46,7 +48,11 @@ export function calcularLucroMissoes(missoes) {
   // ATENÇÃO: Algumas missões falharam e não têm a propriedade 'pagamento', ou 'creditos' está vazio.
   // Use ?. para tentar acessar os creditos, e use ?? 0 para somar zero caso não exista pagamento.
   // Retorne o total.
-
+    let total = 0;
+    for (const objeto of missoes){
+      total += objeto?.pagamento?.creditos ?? 0;
+    }
+    return total;
 }
 
 
