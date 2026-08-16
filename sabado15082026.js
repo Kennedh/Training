@@ -13,10 +13,9 @@ export function prepararHeroi(heroi) {
   // 3. Acesse o nome da arma usando o caminho: heroi.equipamentos.arma.nome
   // 4. Use ?. e ?? para que, se não houver arma equipada, o valor seja "Punhos Nus".
   // 5. Retorne um NOVO objeto no formato: { nome, nivel, arma, statusBase }
-  const { nome, nivel, vida, mana, equipamentos } = heroi;
-  const { statusBase } = { statusBase: { vida, mana } };
-  const arma = equipamentos?.arma?.nome ?? "Punhos Nus";
-  return { nome, nivel, arma, statusBase: { vida, mana } };
+  const {nome, nivel, equipamentos, ...statusBase} = heroi
+  const arma = equipamentos?.arma.nome ?? "Punhos Nus"
+  return {nome, nivel, arma, statusBase}
 }
 
 // -----------------------------------------------------------------------------
@@ -26,7 +25,7 @@ export function coletarLoot(mochilaAtual, itensDropados) {
   // TODO: Use Spread (...) para unir os arrays 'mochilaAtual' e 'itensDropados'.
   // Adicione a string "Chave do Chefe" na PRIMEIRA posição do novo array.
   // Retorne o novo array.
-  return ["Chave do Chefe", ...mochilaAtual, ...itensDropados];
+  return ["Chave do Chefe", ...mochilaAtual, ...itensDropados]
 }
 
 // -----------------------------------------------------------------------------
@@ -43,11 +42,11 @@ export function calcularDanoTotal(habilidadesUsadas) {
   // Use for...of para iterar sobre a lista.
   // Some o dano usando o dicionário TABELA_HABILIDADES (use || 0 para habilidades que falharam ou não existem).
   // Retorne o dano total causado no turno.
-  let danoTotal = 0;
-  for (const habilidade of habilidadesUsadas) {
-    danoTotal += TABELA_HABILIDADES[habilidade] || 0;
+  let danoTotal = 0
+  for(const habilidade of habilidadesUsadas){
+    danoTotal += TABELA_HABILIDADES[habilidade] || 0
   }
-  return danoTotal;
+  return danoTotal
 }
 
 // -----------------------------------------------------------------------------
@@ -66,11 +65,10 @@ export function processarFimDeFase(dadosDaFase) {
   //   inventarioFinal: <resultado da função coletarLoot>,
   //   danoCausado: <resultado da função calcularDanoTotal>
   // }
-  return {
-    perfil: prepararHeroi(dadosDaFase.heroi),
-    inventarioFinal: coletarLoot(dadosDaFase.mochila, dadosDaFase.loot),
-    danoCausado: calcularDanoTotal(dadosDaFase.combos)
-  };
+  const perfil = prepararHeroi(dadosDaFase.heroi)
+  const inventarioFinal = coletarLoot(dadosDaFase.mochila, dadosDaFase.loot)
+  const danoCausado = calcularDanoTotal(dadosDaFase.combos)
+  return {perfil, inventarioFinal, danoCausado}
 }
 
 
