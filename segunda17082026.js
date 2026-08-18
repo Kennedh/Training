@@ -11,7 +11,7 @@ export function formatarTicketsERP(chamados) {
   // TODO: 'chamados' é um array de objetos: { id: 1042, cliente: "Fazenda Sol", erro: "Falha no SQL" }
   // Use o .map() para transformar cada objeto em uma string formatada.
   // Retorne um novo array de strings no formato: "[TICKET 1042] Fazenda Sol: Falha no SQL"
-   return chamados.map(chamado => `[TICKET ${chamado.id}] ${chamado.cliente}: ${chamado.erro}`);
+  return chamados.map(({ id, cliente, erro }) => `[TICKET ${id}] ${cliente}: ${erro}`);
 }
 
 // -----------------------------------------------------------------------------
@@ -35,7 +35,8 @@ export function calcularTempoDeEstudo(sessoes) {
   // Use o .reduce() para somar todos os 'minutos' das sessões.
   // Não esqueça de passar o 0 no final do reduce como valor inicial do acumulador!
   // Retorne o total de minutos.
-  return sessoes.reduce((acumulador, sessao) => acumulador + sessao.minutos, 0);
+  return sessoes.reduce((acumulador, { minutos }) => acumulador + minutos, 0);
+
 }
 
 // -----------------------------------------------------------------------------
@@ -48,8 +49,8 @@ export function extrairProcessosCriticos(processos) {
   // 2. Logo em seguida, emende um .map() para pegar apenas o 'nome' desses processos filtrados.
   // Retorne o array final contendo apenas os nomes dos processos que estão fritando o PC.
   return processos
-    .filter(processo => processo.usoCPU > 80)
-    .map(processo => processo.nome);
+    .filter(({ usoCPU }) => usoCPU > 80)
+    .map(({ nome }) => nome);
 }
 
 
