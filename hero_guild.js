@@ -1,42 +1,41 @@
-class Heroi {
-  constructor(nome, vocacao, nivel) {
+class Prato {
+  constructor(nome, categoria, preco) {
     this.nome = nome;
-    this.vocacao = vocacao; // Ex: 'Mago', 'Guerreiro', 'Arqueiro'
-    this.nivel = nivel;
+    this.categoria = categoria; // Ex: 'Entrada', 'Prato Principal', 'Sobremesa'
+    this.preco = preco;
   }
 }
 
-class Guilda {
+class Cardapio {
   constructor() {
-    this.membros = []; // Um array que vai guardar os objetos da classe Heroi
+    this.pratos = []; // Array que guarda os objetos da classe Prato
   }
 
-  recrutar(heroi) {
-    this.membros.push(heroi);
+  adicionarPrato(prato) {
+    this.pratos.push(prato);
   }
 
-  // DESAFIO 1: Combinar filter e map
-  obterNomesPorVocacao(vocacaoBuscada) {
-    // Aqui nós queremos:
-    // 1. Filtrar os membros que têm a mesma vocação que a 'vocacaoBuscada'
-    // 2. Mapear esse resultado para devolver APENAS os nomes desses heróis
-    const res = this.membros.filter(membro => membro.vocacao === vocacaoBuscada)
-    return res.map(resultado => resultado.nome)
+  // DESAFIO 1: Combinar filter e map (Tente encadear!)
+  obterNomesPorCategoria(categoriaBuscada) {
+    // 1. Filtre os pratos que pertencem à 'categoriaBuscada'
+    // 2. Mapeie para retornar APENAS os nomes desses pratos
+    const pratosFiltrados = this.pratos.filter(prato => prato.categoria === categoriaBuscada);
+    return pratosFiltrados.map(pratos => pratos.nome);
   }
 
   // DESAFIO 2: Usar o reduce
-  calcularPoderTotal() {
-    // Aqui nós queremos:
-    // 1. Somar o 'nivel' de todos os membros da guilda e retornar o total
-    return this.membros.reduce((acc, item) => acc + item.nivel, 0);
+  calcularCustoDoMenuCompleto() {
+    // 1. Some o 'preco' de todos os pratos no cardápio e retorne o valor total
+    return this.pratos.reduce((acc,item) => acc + item.preco,0)
   }
 }
 
-// Criando nossos heróis e a guilda para testar depois:
-const guilda = new Guilda();
-guilda.recrutar(new Heroi("Gandalf", "Mago", 100));
-guilda.recrutar(new Heroi("Aragorn", "Guerreiro", 85));
-guilda.recrutar(new Heroi("Merlin", "Mago", 120));
+// Criando nossos pratos e o cardápio para testar:
+const meuCardapio = new Cardapio();
+meuCardapio.adicionarPrato(new Prato("Salada Caesar", "Entrada", 25));
+meuCardapio.adicionarPrato(new Prato("Bife Ancho", "Prato Principal", 85));
+meuCardapio.adicionarPrato(new Prato("Pudim", "Sobremesa", 15));
+meuCardapio.adicionarPrato(new Prato("Lasanha", "Prato Principal", 55));
 
-console.log(guilda.calcularPoderTotal())
-console.log(guilda.obterNomesPorVocacao("Mago"))
+console.log(meuCardapio.obterNomesPorCategoria("Prato Principal"));
+console.log(meuCardapio.calcularCustoDoMenuCompleto());
