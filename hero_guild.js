@@ -19,8 +19,7 @@ class Cardapio {
   obterNomesPorCategoria(categoriaBuscada) {
     // 1. Filtre os pratos que pertencem à 'categoriaBuscada'
     // 2. Mapeie para retornar APENAS os nomes desses pratos
-    const pratosFiltrados = this.pratos.filter(prato => prato.categoria === categoriaBuscada);
-    return pratosFiltrados.map(pratos => pratos.nome);
+    return this.pratos.filter(prato => prato.categoria === categoriaBuscada).map(pratos => pratos.nome);
   }
 
   // DESAFIO 2: Usar o reduce
