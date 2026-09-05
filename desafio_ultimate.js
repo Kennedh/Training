@@ -22,6 +22,8 @@ class NaveExploradora {
     // 1. Filtre as missões que tenham status "Concluída" E dificuldade "Difícil".
     // 2. Mapeie para retornar apenas o 'nome' da missão.
     // Dica: Tente usar desestruturação nos parâmetros!
+    
+    return 
   }
 
   // DESAFIO 2: filter e reduce

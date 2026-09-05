@@ -1,40 +1,64 @@
-class Prato {
-  constructor(nome, categoria, preco) {
+class Missao {
+  constructor(nome, dificuldade, recompensa, status) {
     this.nome = nome;
-    this.categoria = categoria; // Ex: 'Entrada', 'Prato Principal', 'Sobremesa'
-    this.preco = preco;
+    this.dificuldade = dificuldade; // Ex: 'Fácil', 'Média', 'Difícil'
+    this.recompensa = recompensa; // Valor em moedas galácticas
+    this.status = status; // 'Pendente' ou 'Concluída'
   }
 }
 
-class Cardapio {
-  constructor() {
-    this.pratos = []; // Array que guarda os objetos da classe Prato
+class NaveExploradora {
+  constructor(nome) {
+    this.nome = nome;
+    this.missoes = []; // Array de objetos da classe Missao
   }
 
-  adicionarPrato(prato) {
-    this.pratos.push(prato);
+  adicionarMissao(missao) {
+    this.missoes.push(missao);
   }
 
-  // DESAFIO 1: Combinar filter e map (Tente encadear!)
-  obterNomesPorCategoria(categoriaBuscada) {
-    // 1. Filtre os pratos que pertencem à 'categoriaBuscada'
-    // 2. Mapeie para retornar APENAS os nomes desses pratos
-    return this.pratos.filter(prato => prato.categoria === categoriaBuscada).map(pratos => pratos.nome);
+  // DESAFIO 1: filter, map e encadeamento
+  obterNomesDasMissoesConcluidasDificeis() {
+    // 1. Filtre as missões que tenham status "Concluída" E dificuldade "Difícil".
+    // 2. Mapeie para retornar apenas o 'nome' da missão.
+    // Dica: Tente usar desestruturação nos parâmetros!
+    const filtMissoes = this.missoes.filter(item => item.status === "Concluída" && item.dificuldade === "Difícil")
+    return filtMissoes.map(missao => missao.nome)
   }
 
-  // DESAFIO 2: Usar o reduce
-  calcularCustoDoMenuCompleto() {
-    // 1. Some o 'preco' de todos os pratos no cardápio e retorne o valor total
-    return this.pratos.reduce((acc,item) => acc + item.preco,0)
+  // DESAFIO 2: filter e reduce
+  calcularTotalDeRecompensasPendentes() {
+     // 1. Filtre as missões com status 'Pendente'.
+     // 2. Use o reduce para somar a 'recompensa' de todas elas e retorne o total.
+  }
+
+  // DESAFIO 3: Async/Await, try/catch, e throw
+  async transmitirRelatorio(apiExterna) {
+    // 1. Se o array this.missoes estiver vazio (length === 0), lance um erro: throw new Error("Sem missões")
+    // 2. Use um try/catch.
+    // 3. No try, aguarde (await) a promessa: apiExterna.enviar(this.missoes) e retorne o resultado.
+    // 4. No catch, retorne a mensagem de erro capturada.
   }
 }
 
-// Criando nossos pratos e o cardápio para testar:
-const meuCardapio = new Cardapio();
-meuCardapio.adicionarPrato(new Prato("Salada Caesar", "Entrada", 25));
-meuCardapio.adicionarPrato(new Prato("Bife Ancho", "Prato Principal", 85));
-meuCardapio.adicionarPrato(new Prato("Pudim", "Sobremesa", 15));
-meuCardapio.adicionarPrato(new Prato("Lasanha", "Prato Principal", 55));
+// ---------------------------------------------------------
+// 🧪 ÁREA DE TESTES (Não precisa alterar)
+// ---------------------------------------------------------
+const minhaNave = new NaveExploradora("Apollo");
+minhaNave.adicionarMissao(new Missao("Mapear Marte", "Média", 500, "Concluída"));
+minhaNave.adicionarMissao(new Missao("Resgate em Júpiter", "Difícil", 2000, "Concluída"));
+minhaNave.adicionarMissao(new Missao("Coletar Minérios", "Fácil", 300, "Pendente"));
+minhaNave.adicionarMissao(new Missao("Explorar Buraco Negro", "Difícil", 5000, "Pendente"));
 
-console.log(meuCardapio.obterNomesPorCategoria("Prato Principal"));
-console.log(meuCardapio.calcularCustoDoMenuCompleto());
+console.log("Desafio 1:", minhaNave.obterNomesDasMissoesConcluidasDificeis()); 
+// Esperado: [ 'Resgate em Júpiter' ]
+
+console.log("Desafio 2:", minhaNave.calcularTotalDeRecompensasPendentes()); 
+// Esperado: 5300 (300 + 5000)
+
+// Simulador de API para o Desafio 3
+const apiSimulada = {
+  enviar: async (dados) => "Relatório transmitido com sucesso!"
+};
+minhaNave.transmitirRelatorio(apiSimulada).then(console.log);
+// Esperado: "Relatório transmitido com sucesso!"
