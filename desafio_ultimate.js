@@ -22,14 +22,15 @@ class NaveExploradora {
     // 1. Filtre as missões que tenham status "Concluída" E dificuldade "Difícil".
     // 2. Mapeie para retornar apenas o 'nome' da missão.
     // Dica: Tente usar desestruturação nos parâmetros!
-    
-    return 
+    const filtMissoes = this.missoes.filter(item => item.status === "Concluída" && item.dificuldade === "Difícil")
+    return filtMissoes.map(missao => missao.nome)
   }
 
   // DESAFIO 2: filter e reduce
   calcularTotalDeRecompensasPendentes() {
      // 1. Filtre as missões com status 'Pendente'.
      // 2. Use o reduce para somar a 'recompensa' de todas elas e retorne o total.
+     return this.missoes.filter(item => item.status === "Pendente").reduce((acc,item) => acc + item.recompensa,0);
   }
 
   // DESAFIO 3: Async/Await, try/catch, e throw
