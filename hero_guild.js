@@ -1,64 +1,42 @@
-class Missao {
-  constructor(nome, dificuldade, recompensa, status) {
+class Heroi {
+  constructor(nome, vocacao, nivel) {
     this.nome = nome;
-    this.dificuldade = dificuldade; // Ex: 'Fácil', 'Média', 'Difícil'
-    this.recompensa = recompensa; // Valor em moedas galácticas
-    this.status = status; // 'Pendente' ou 'Concluída'
+    this.vocacao = vocacao; // Ex: 'Mago', 'Guerreiro', 'Arqueiro'
+    this.nivel = nivel;
   }
 }
 
-class NaveExploradora {
-  constructor(nome) {
-    this.nome = nome;
-    this.missoes = []; // Array de objetos da classe Missao
+class Guilda {
+  constructor() {
+    this.membros = []; // Um array que vai guardar os objetos da classe Heroi
   }
 
-  adicionarMissao(missao) {
-    this.missoes.push(missao);
+  recrutar(heroi) {
+    this.membros.push(heroi);
   }
 
-  // DESAFIO 1: filter, map e encadeamento
-  obterNomesDasMissoesConcluidasDificeis() {
-    // 1. Filtre as missões que tenham status "Concluída" E dificuldade "Difícil".
-    // 2. Mapeie para retornar apenas o 'nome' da missão.
-    // Dica: Tente usar desestruturação nos parâmetros!
-    const filtMissoes = this.missoes.filter(item => item.status === "Concluída" && item.dificuldade === "Difícil")
-    return filtMissoes.map(missao => missao.nome)
+  // DESAFIO 1: Combinar filter e map
+  obterNomesPorVocacao(vocacaoBuscada) {
+    // Aqui nós queremos:
+    // 1. Filtrar os membros que têm a mesma vocação que a 'vocacaoBuscada'
+    // 2. Mapear esse resultado para devolver APENAS os nomes desses heróis
+    const res = this.membros.filter(membro => membro.vocacao === vocacaoBuscada)
+    return res.map(resultado => resultado.nome)
   }
 
-  // DESAFIO 2: filter e reduce
-  calcularTotalDeRecompensasPendentes() {
-     // 1. Filtre as missões com status 'Pendente'.
-     // 2. Use o reduce para somar a 'recompensa' de todas elas e retorne o total.
-  }
-
-  // DESAFIO 3: Async/Await, try/catch, e throw
-  async transmitirRelatorio(apiExterna) {
-    // 1. Se o array this.missoes estiver vazio (length === 0), lance um erro: throw new Error("Sem missões")
-    // 2. Use um try/catch.
-    // 3. No try, aguarde (await) a promessa: apiExterna.enviar(this.missoes) e retorne o resultado.
-    // 4. No catch, retorne a mensagem de erro capturada.
+  // DESAFIO 2: Usar o reduce
+  calcularPoderTotal() {
+    // Aqui nós queremos:
+    // 1. Somar o 'nivel' de todos os membros da guilda e retornar o total
+    return this.membros.reduce((acc, item) => acc + item.nivel, 0);
   }
 }
 
-// ---------------------------------------------------------
-// 🧪 ÁREA DE TESTES (Não precisa alterar)
-// ---------------------------------------------------------
-const minhaNave = new NaveExploradora("Apollo");
-minhaNave.adicionarMissao(new Missao("Mapear Marte", "Média", 500, "Concluída"));
-minhaNave.adicionarMissao(new Missao("Resgate em Júpiter", "Difícil", 2000, "Concluída"));
-minhaNave.adicionarMissao(new Missao("Coletar Minérios", "Fácil", 300, "Pendente"));
-minhaNave.adicionarMissao(new Missao("Explorar Buraco Negro", "Difícil", 5000, "Pendente"));
+// Criando nossos heróis e a guilda para testar depois:
+const guilda = new Guilda();
+guilda.recrutar(new Heroi("Gandalf", "Mago", 100));
+guilda.recrutar(new Heroi("Aragorn", "Guerreiro", 85));
+guilda.recrutar(new Heroi("Merlin", "Mago", 120));
 
-console.log("Desafio 1:", minhaNave.obterNomesDasMissoesConcluidasDificeis()); 
-// Esperado: [ 'Resgate em Júpiter' ]
-
-console.log("Desafio 2:", minhaNave.calcularTotalDeRecompensasPendentes()); 
-// Esperado: 5300 (300 + 5000)
-
-// Simulador de API para o Desafio 3
-const apiSimulada = {
-  enviar: async (dados) => "Relatório transmitido com sucesso!"
-};
-minhaNave.transmitirRelatorio(apiSimulada).then(console.log);
-// Esperado: "Relatório transmitido com sucesso!"
+console.log(guilda.calcularPoderTotal())
+console.log(guilda.obterNomesPorVocacao("Mago"))
