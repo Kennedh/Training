@@ -39,6 +39,14 @@ class NaveExploradora {
     // 2. Use um try/catch.
     // 3. No try, aguarde (await) a promessa: apiExterna.enviar(this.missoes) e retorne o resultado.
     // 4. No catch, retorne a mensagem de erro capturada.
+    try {
+    if (this.missoes.length === 0) {
+      throw new Error("Sem missões");
+    }
+    const resultado = await apiExterna.enviar(this.missoes);
+    return resultado;
+  } catch (erro) {
+    return erro.message;
   }
 }
 
