@@ -48,7 +48,10 @@ class NaveExploradora {
   } catch (erro) {
     return erro.message;
   }
+  }
 }
+
+
 
 // ---------------------------------------------------------
 // 🧪 ÁREA DE TESTES (Não precisa alterar)
