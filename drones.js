@@ -23,7 +23,10 @@ class CentralDeDrones {
     // 1. Filtre os pacotes que tenham status 'Pendente' E cujo peso seja menor ou igual ao pesoMaximo.
     // 2. Mapeie para retornar APENAS o 'destino' desses pacotes.
     return this.pacotes
-      .filter(pacote => pacote.status === 'Pendente' && pacote.peso <= pesoMaximo)
+      .filter(pacote =>
+        pacote.status === "Pendente" &&
+        pacote.peso <= pesoMaximo
+      )
       .map(pacote => pacote.destino);
   }
 
@@ -35,9 +38,9 @@ class CentralDeDrones {
     // 2. Dentro dela, use o setTimeout para esperar 1500ms (1.5 segundos).
     // 3. Quando o tempo acabar, mude o status do pacote para 'Entregue'.
     // 4. Chame o resolve() passando uma mensagem: `Pacote ${pacote.id} entregue!`
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       setTimeout(() => {
-        pacote.status = 'Entregue';
+        pacote.status = "Entregue";
         resolve(`Pacote ${pacote.id} entregue!`);
       }, 1500);
     });
@@ -53,19 +56,20 @@ class CentralDeDrones {
     // 4. Abra um bloco try/catch.
     // 5. No try, use o await para esperar a função this.vooDoDrone(pacote) e retorne o resultado.
     // 6. No catch, retorne a mensagem do erro (erro.message).
-    const pacote = this.pacotes.find(p => p.id === idPacote);
-
-    if (!pacote) {
-      throw new Error("Pacote não encontrado");
-    }
-
-    if (pacote.status === 'Entregue') {
-      throw new Error("Pacote já foi entregue");
-    }
-
     try {
-      const resultado = await this.vooDoDrone(pacote);
-      return resultado;
+      const pacote = this.pacotes.find(
+        pacote => pacote.id === idPacote
+      );
+
+      if (!pacote) {
+        throw new Error("Pacote não encontrado");
+      }
+
+      if (pacote.status === "Entregue") {
+        throw new Error("Pacote já foi entregue");
+      }
+
+      return await this.vooDoDrone(pacote);
     } catch (erro) {
       return erro.message;
     }
