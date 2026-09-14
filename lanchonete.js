@@ -25,6 +25,11 @@ class Lanchonete {
     // TODO: Retorne uma nova Promise.
     // Use o setTimeout, mas o tempo de espera deve ser o 'lanche.tempoPreparo'.
     // Quando o tempo acabar, chame o resolve() com a string: `${lanche.nome} pronto!`
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(`${lanche.nome} pronto!`);
+      }, lanche.tempoPreparo);
+    });
   }
 
   // ==========================================
