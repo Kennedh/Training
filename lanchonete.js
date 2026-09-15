@@ -44,6 +44,18 @@ class Lanchonete {
     //    - Pegue o total usando this.calcularTotal(lanches).
     //    - Retorne a string: `Pedido de ${cliente} finalizado! Total: R$ ${total}`
     // 4. No catch: retorne a mensagem de erro.
+    if (lanches.length === 0) {
+      throw new Error("Pedido vazio!");
+    }
+
+    try {
+      const promessas = lanches.map((lanche) => this.prepararLanche(lanche));
+      await Promise.all(promessas);
+      const total = this.calcularTotal(lanches);
+      return `Pedido de ${cliente} finalizado! Total: R$ ${total}`;
+    } catch (erro) {
+      return erro.message;
+    }
   }
 }
 
