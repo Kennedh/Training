@@ -15,7 +15,7 @@ class Lanchonete {
     // TODO: 'lanches' é um array de objetos da classe Lanche.
     // Use o .reduce() para somar o 'preco' de todos eles e retorne o valor total.
     //return this.lanches.preco.reduce((total,preco) => total + preco,0)
-    return lanches.reduce((acc,lanches) => acc + lanches.preco,0)
+    return lanches.reduce((acc, lanche) => acc + lanche.preco, 0);
   }
 
   // ==========================================
@@ -49,9 +49,13 @@ class Lanchonete {
     }
 
     try {
-      const promessas = lanches.map((lanche) => this.prepararLanche(lanche));
-      await Promise.all(promessas);
+      for (const lanche of lanches) {
+        const resultado = await this.prepararLanche(lanche);
+        console.log(resultado);
+      }
+
       const total = this.calcularTotal(lanches);
+
       return `Pedido de ${cliente} finalizado! Total: R$ ${total}`;
     } catch (erro) {
       return erro.message;
@@ -75,7 +79,7 @@ async function rodarTestes() {
   console.log("Calculando total da Mesa 1...");
   console.log("Total esperado: 48 | Total calculado:", lanchonete.calcularTotal(pedidoMesa1));
 
-  console.log("\nPreparando pedido da Mesa 1 (Aguarde ~2 segundos)...");
+  console.log("\nPreparando pedido da Mesa 1 (Aguarde ~3.5 segundos)...");
   const resultado = await lanchonete.entregarPedido("Maria", pedidoMesa1);
   console.log(resultado);
   // Esperado: "Pedido de Maria finalizado! Total: R$ 48"
