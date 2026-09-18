@@ -22,7 +22,9 @@ class LojaRetro {
     // TODO:
     // 1. Filtre os jogos que tenham o gênero igual ao 'generoBuscado'.
     // 2. Mapeie para retornar APENAS os nomes desses jogos.
-    return this.catalogo.filter(gbusc => gbusc.genero === generoBuscado).map(res => res.nome)
+    return this.catalogo
+      .filter(jogo => jogo.genero === generoBuscado)
+      .map(jogo => jogo.nome);
   }
 
   // ==========================================
@@ -31,7 +33,10 @@ class LojaRetro {
   calcularValorDoEstoque() {
     // TODO:
     // 1. Some o 'preco' de todos os jogos no catálogo e retorne o total.
-    return this.catalogo.reduce ((total,jogo) => total + jogo.preco,0)
+    return this.catalogo.reduce(
+      (total, jogo) => total + jogo.preco,
+      0
+    );
   }
 }
 
