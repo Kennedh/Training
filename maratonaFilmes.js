@@ -1,0 +1,51 @@
+class Filme {
+  constructor(titulo, genero, duracaoEmMinutos) {
+    this.titulo = titulo;
+    this.genero = genero; 
+    this.duracao = duracaoEmMinutos;
+  }
+}
+
+class Maratona {
+  constructor() {
+    this.filmes = [];
+  }
+
+  adicionarFilme(filme) {
+    this.filmes.push(filme);
+  }
+
+  // ==========================================
+  // DESAFIO 1: filter e map
+  // ==========================================
+  obterTitulosPorGenero(generoBuscado) {
+    // TODO:
+    // 1. Filtre os filmes que tenham o gênero igual ao 'generoBuscado'.
+    // 2. Mapeie para retornar APENAS os títulos desses filmes.
+    return this.filmes.filter(filme => filme.genero === generoBuscado).map(filme => filme.titulo)
+  }
+
+  // ==========================================
+  // DESAFIO 2: reduce
+  // ==========================================
+  calcularTempoTotal() {
+    // TODO:
+    // 1. Some a 'duracao' de todos os filmes na lista e retorne o total.
+    return this.filmes.reduce((total, filme) => total + filme.duracao,0)
+  }
+}
+
+// ---------------------------------------------------------
+// 🧪 ÁREA DE TESTES
+// ---------------------------------------------------------
+const minhaMaratona = new Maratona();
+minhaMaratona.adicionarFilme(new Filme("Senhor dos Anéis", "Fantasia", 180));
+minhaMaratona.adicionarFilme(new Filme("Matrix", "Ficção Científica", 136));
+minhaMaratona.adicionarFilme(new Filme("O Hobbit", "Fantasia", 169));
+minhaMaratona.adicionarFilme(new Filme("Shrek", "Animação", 90));
+
+console.log("Filmes de Fantasia:", minhaMaratona.obterTitulosPorGenero("Fantasia"));
+// Esperado: [ 'Senhor dos Anéis', 'O Hobbit' ]
+
+console.log("Tempo total da maratona (minutos):", minhaMaratona.calcularTempoTotal());
+// Esperado: 575
