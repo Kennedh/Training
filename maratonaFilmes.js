@@ -33,6 +33,15 @@ class Maratona {
     // 1. Some a 'duracao' de todos os filmes na lista e retorne o total.
     return this.filmes.reduce((total, filme) => total + filme.duracao,0)
   }
+  // ==========================================
+  // DESAFIO 3: find
+  // ==========================================
+  buscarFilmePorTitulo(tituloBuscado) {
+    // TODO:
+    // Use o .find() na lista de filmes para encontrar e retornar o objeto do filme 
+    // que tenha o 'titulo' exatamente igual ao 'tituloBuscado'.
+    return this.filmes.find((filme) => filme.titulo === tituloBuscado)
+  }
 }
 
 // ---------------------------------------------------------
@@ -49,3 +58,6 @@ console.log("Filmes de Fantasia:", minhaMaratona.obterTitulosPorGenero("Fantasia
 
 console.log("Tempo total da maratona (minutos):", minhaMaratona.calcularTempoTotal());
 // Esperado: 575
+
+console.log(minhaMaratona.buscarFilmePorTitulo("Shrek"))
+// Esperado: { titulo: 'Shrek', genero: 'Animação', duracao: 90 }
