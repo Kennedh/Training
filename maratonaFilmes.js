@@ -42,6 +42,16 @@ class Maratona {
     // que tenha o 'titulo' exatamente igual ao 'tituloBuscado'.
     return this.filmes.find((filme) => filme.titulo === tituloBuscado)
   }
+  // ==========================================
+  // DESAFIO 4: some
+  // ==========================================
+  temFilmeLongo(tempoMinimo) {
+    // TODO:
+    // Use o .some() para verificar se existe ALGUM filme na lista
+    // que tenha a 'duracao' maior ou igual ao 'tempoMinimo'. 
+    // Ele já vai retornar true ou false automaticamente!
+    return this.filmes.some(filme => filme.duracao >= tempoMinimo)
+  }
 }
 
 // ---------------------------------------------------------
@@ -61,3 +71,6 @@ console.log("Tempo total da maratona (minutos):", minhaMaratona.calcularTempoTot
 
 console.log(minhaMaratona.buscarFilmePorTitulo("Shrek"))
 // Esperado: { titulo: 'Shrek', genero: 'Animação', duracao: 90 }
+
+console.log(minhaMaratona.temFilmeLongo(150))
+// Esperado: True
