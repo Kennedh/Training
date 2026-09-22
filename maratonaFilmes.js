@@ -52,6 +52,15 @@ class Maratona {
     // Ele já vai retornar true ou false automaticamente!
     return this.filmes.some(filme => filme.duracao >= tempoMinimo)
   }
+  // ==========================================
+  // DESAFIO 5: every
+  // ==========================================
+  todosSaoCurtos(tempoMaximo) {
+    // TODO:
+    // Use o .every() para verificar se TODOS os filmes na lista
+    // têm a 'duracao' menor ou igual ao 'tempoMaximo'.
+    return this.filmes.every(filme => filme.duracao <= tempoMaximo)
+  }
 }
 
 // ---------------------------------------------------------
@@ -74,3 +83,9 @@ console.log(minhaMaratona.buscarFilmePorTitulo("Shrek"))
 
 console.log(minhaMaratona.temFilmeLongo(150))
 // Esperado: True
+
+console.log(minhaMaratona.todosSaoCurtos(200))
+// Esperado: True
+
+console.log(minhaMaratona.todosSaoCurtos(150))
+// Esperado: False
