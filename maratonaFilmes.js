@@ -61,6 +61,16 @@ class Maratona {
     // têm a 'duracao' menor ou igual ao 'tempoMaximo'.
     return this.filmes.every(filme => filme.duracao <= tempoMaximo)
   }
+  // ==========================================
+  // DESAFIO 6: O "Combo" 
+  // ==========================================
+  calcularTempoPorGenero(generoBuscado) {
+    // TODO:
+    // 1. Isole apenas os filmes que correspondam ao 'generoBuscado'.
+    // 2. Some a duração de todos os filmes que sobraram nessa lista filtrada.
+    // Dica: Você pode encadear dois métodos que já usou antes!
+    return this.filmes.filter(filme => filme.genero === generoBuscado).reduce((total, filme) => total + filme.duracao,0)
+  }
 }
 
 // ---------------------------------------------------------
@@ -89,3 +99,6 @@ console.log(minhaMaratona.todosSaoCurtos(200))
 
 console.log(minhaMaratona.todosSaoCurtos(150))
 // Esperado: False
+
+console.log("Tempo total de Fantasia:", minhaMaratona.calcularTempoPorGenero("Fantasia"));
+// Esperado: 349 (pois Senhor dos Anéis tem 180 e O Hobbit tem 169)
