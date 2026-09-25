@@ -80,6 +80,18 @@ class Maratona {
     // do filme mais curto para o filme mais longo.
     return this.filmes.sort((a, b) => a.duracao - b.duracao)
   }
+    // ==========================================
+  // DESAFIO 8: filter e reduce
+  // ==========================================
+  calcularDuracaoPorGenero(generoBuscado) {
+    // TODO:
+    // 1. Filtre os filmes que tenham o gênero igual ao 'generoBuscado'.
+    // 2. Some a duração de todos os filmes encontrados.
+    // 3. Retorne a duração total em minutos.
+    return this.filmes
+      .filter(filme => filme.genero === generoBuscado)
+      .reduce((total, filme) => total + filme.duracao, 0);
+  }
 }
 
 // ---------------------------------------------------------
@@ -113,3 +125,8 @@ console.log("Tempo total de Fantasia:", minhaMaratona.calcularTempoPorGenero("Fa
 // Esperado: 349 (pois Senhor dos Anéis tem 180 e O Hobbit tem 169)
 
 console.log("Filmes ordenados por duração", minhaMaratona.ordenarFilmesPorDuracao())
+
+console.log(
+  "Duração total dos filmes de Ação:",
+  maratona.calcularDuracaoPorGenero("Ação")
+);
