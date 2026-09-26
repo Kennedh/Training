@@ -92,6 +92,16 @@ class Maratona {
       .filter(filme => filme.genero === generoBuscado)
       .reduce((total, filme) => total + filme.duracao, 0);
   }
+  // ==========================================
+  // DESAFIO 9: reduce (Nível Avançado)
+  // ==========================================
+  obterFilmeMaisLongo() {
+    // TODO:
+    // Use o .reduce() na lista this.filmes para descobrir e retornar o OBJETO do filme com a maior 'duracao'.
+    return this.filmes.reduce((maisLongo,filmeAtual) => {
+      return filmeAtual.duracao > maisLongo.duracao ? filmeAtual : maisLongo;
+    }
+  )}
 }
 
 // ---------------------------------------------------------
@@ -126,7 +136,6 @@ console.log("Tempo total de Fantasia:", minhaMaratona.calcularTempoPorGenero("Fa
 
 console.log("Filmes ordenados por duração", minhaMaratona.ordenarFilmesPorDuracao())
 
-console.log(
-  "Duração total dos filmes de Ação:",
-  maratona.calcularDuracaoPorGenero("Ação")
-);
+console.log(  "Duração total dos filmes de Ação:", minhaMaratona.calcularDuracaoPorGenero("Ação"));
+
+console.log(minhaMaratona.obterFilmeMaisLongo())
