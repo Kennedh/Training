@@ -102,6 +102,14 @@ class Maratona {
       return filmeAtual.duracao > maisLongo.duracao ? filmeAtual : maisLongo;
     }
   )}
+  // ==========================================
+  // DESAFIO 10: findIndex
+  // ==========================================
+  verificarPosicaoNaFila(tituloBuscado) {
+    // TODO:
+    // Use o .findIndex() na lista this.filmes para descobrir e retornar 
+    // a posição (índice) do filme que tenha o 'titulo' igual ao 'tituloBuscado'.
+  }
 }
 
 // ---------------------------------------------------------
