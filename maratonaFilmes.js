@@ -109,6 +109,7 @@ class Maratona {
     // TODO:
     // Use o .findIndex() na lista this.filmes para descobrir e retornar 
     // a posição (índice) do filme que tenha o 'titulo' igual ao 'tituloBuscado'.
+    return this.filmes.findIndex(filme => filme.titulo === tituloBuscado)
   }
 }
 
@@ -147,3 +148,5 @@ console.log("Filmes ordenados por duração", minhaMaratona.ordenarFilmesPorDura
 console.log(  "Duração total dos filmes de Ação:", minhaMaratona.calcularDuracaoPorGenero("Ação"));
 
 console.log(minhaMaratona.obterFilmeMaisLongo())
+
+console.log(minhaMaratona.verificarPosicaoNaFila("O Hobbit"))
