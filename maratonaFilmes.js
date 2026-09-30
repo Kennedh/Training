@@ -149,4 +149,8 @@ console.log(  "Duração total dos filmes de Ação:", minhaMaratona.calcularDur
 
 console.log(minhaMaratona.obterFilmeMaisLongo())
 
-console.log(minhaMaratona.verificarPosicaoNaFila("O Hobbit"))
+console.log("Posição de O Hobbit:", minhaMaratona.verificarPosicaoNaFila("O Hobbit"));
+// Esperado: 2 (pois é o terceiro filme adicionado, posições: 0, 1, 2)
+
+console.log("Posição de Vingadores:", minhaMaratona.verificarPosicaoNaFila("Vingadores"));
+// Esperado: -1 (filme não existe na lista)
