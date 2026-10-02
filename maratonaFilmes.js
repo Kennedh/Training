@@ -1,7 +1,7 @@
 class Filme {
   constructor(titulo, genero, duracaoEmMinutos) {
     this.titulo = titulo;
-    this.genero = genero; 
+    this.genero = genero;
     this.duracao = duracaoEmMinutos;
   }
 }
@@ -22,7 +22,9 @@ class Maratona {
     // TODO:
     // 1. Filtre os filmes que tenham o gênero igual ao 'generoBuscado'.
     // 2. Mapeie para retornar APENAS os títulos desses filmes.
-    return this.filmes.filter(filme => filme.genero === generoBuscado).map(filme => filme.titulo)
+    return this.filmes
+      .filter(filme => filme.genero === generoBuscado)
+      .map(filme => filme.titulo);
   }
 
   // ==========================================
@@ -31,27 +33,37 @@ class Maratona {
   calcularTempoTotal() {
     // TODO:
     // 1. Some a 'duracao' de todos os filmes na lista e retorne o total.
-    return this.filmes.reduce((total, filme) => total + filme.duracao,0)
+    return this.filmes.reduce(
+      (total, filme) => total + filme.duracao,
+      0
+    );
   }
+
   // ==========================================
   // DESAFIO 3: find
   // ==========================================
   buscarFilmePorTitulo(tituloBuscado) {
     // TODO:
-    // Use o .find() na lista de filmes para encontrar e retornar o objeto do filme 
+    // Use o .find() na lista de filmes para encontrar e retornar o objeto do filme
     // que tenha o 'titulo' exatamente igual ao 'tituloBuscado'.
-    return this.filmes.find((filme) => filme.titulo === tituloBuscado)
+    return this.filmes.find(
+      filme => filme.titulo === tituloBuscado
+    );
   }
+
   // ==========================================
   // DESAFIO 4: some
   // ==========================================
   temFilmeLongo(tempoMinimo) {
     // TODO:
     // Use o .some() para verificar se existe ALGUM filme na lista
-    // que tenha a 'duracao' maior ou igual ao 'tempoMinimo'. 
+    // que tenha a 'duracao' maior ou igual ao 'tempoMinimo'.
     // Ele já vai retornar true ou false automaticamente!
-    return this.filmes.some(filme => filme.duracao >= tempoMinimo)
+    return this.filmes.some(
+      filme => filme.duracao >= tempoMinimo
+    );
   }
+
   // ==========================================
   // DESAFIO 5: every
   // ==========================================
@@ -59,18 +71,24 @@ class Maratona {
     // TODO:
     // Use o .every() para verificar se TODOS os filmes na lista
     // têm a 'duracao' menor ou igual ao 'tempoMaximo'.
-    return this.filmes.every(filme => filme.duracao <= tempoMaximo)
+    return this.filmes.every(
+      filme => filme.duracao <= tempoMaximo
+    );
   }
+
   // ==========================================
-  // DESAFIO 6: O "Combo" 
+  // DESAFIO 6: O "Combo"
   // ==========================================
   calcularTempoPorGenero(generoBuscado) {
     // TODO:
     // 1. Isole apenas os filmes que correspondam ao 'generoBuscado'.
     // 2. Some a duração de todos os filmes que sobraram nessa lista filtrada.
     // Dica: Você pode encadear dois métodos que já usou antes!
-    return this.filmes.filter(filme => filme.genero === generoBuscado).reduce((total, filme) => total + filme.duracao,0)
+    return this.filmes
+      .filter(filme => filme.genero === generoBuscado)
+      .reduce((total, filme) => total + filme.duracao, 0);
   }
+
   // ==========================================
   // DESAFIO 7: sort
   // ==========================================
@@ -78,9 +96,12 @@ class Maratona {
     // TODO:
     // Use o .sort() na lista this.filmes para organizá-la
     // do filme mais curto para o filme mais longo.
-    return this.filmes.sort((a, b) => a.duracao - b.duracao)
+    return this.filmes.sort(
+      (a, b) => a.duracao - b.duracao
+    );
   }
-    // ==========================================
+
+  // ==========================================
   // DESAFIO 8: filter e reduce
   // ==========================================
   calcularDuracaoPorGenero(generoBuscado) {
@@ -92,65 +113,140 @@ class Maratona {
       .filter(filme => filme.genero === generoBuscado)
       .reduce((total, filme) => total + filme.duracao, 0);
   }
+
   // ==========================================
   // DESAFIO 9: reduce (Nível Avançado)
   // ==========================================
   obterFilmeMaisLongo() {
     // TODO:
-    // Use o .reduce() na lista this.filmes para descobrir e retornar o OBJETO do filme com a maior 'duracao'.
-    return this.filmes.reduce((maisLongo,filmeAtual) => {
-      return filmeAtual.duracao > maisLongo.duracao ? filmeAtual : maisLongo;
-    }
-  )}
+    // Use o .reduce() na lista this.filmes para descobrir e retornar
+    // o OBJETO do filme com a maior 'duracao'.
+    return this.filmes.reduce((maisLongo, filmeAtual) => {
+      return filmeAtual.duracao > maisLongo.duracao
+        ? filmeAtual
+        : maisLongo;
+    });
+  }
+
   // ==========================================
   // DESAFIO 10: findIndex
   // ==========================================
   verificarPosicaoNaFila(tituloBuscado) {
     // TODO:
-    // Use o .findIndex() na lista this.filmes para descobrir e retornar 
+    // Use o .findIndex() na lista this.filmes para descobrir e retornar
     // a posição (índice) do filme que tenha o 'titulo' igual ao 'tituloBuscado'.
-    return this.filmes.findIndex(filme => filme.titulo === tituloBuscado)
+    return this.filmes.findIndex(
+      filme => filme.titulo === tituloBuscado
+    );
+  }
+
+  // ==========================================
+  // DESAFIO 11: reduce + média
+  // ==========================================
+  calcularDuracaoMedia() {
+    // TODO:
+    // 1. Some a duração de todos os filmes.
+    // 2. Divida o total pela quantidade de filmes.
+    // 3. Retorne a duração média.
+    const tempoTotal = this.filmes.reduce(
+      (total, filme) => total + filme.duracao,
+      0
+    );
+
+    return tempoTotal / this.filmes.length;
   }
 }
 
 // ---------------------------------------------------------
 // 🧪 ÁREA DE TESTES
 // ---------------------------------------------------------
-const minhaMaratona = new Maratona();
-minhaMaratona.adicionarFilme(new Filme("Senhor dos Anéis", "Fantasia", 180));
-minhaMaratona.adicionarFilme(new Filme("Matrix", "Ficção Científica", 136));
-minhaMaratona.adicionarFilme(new Filme("O Hobbit", "Fantasia", 169));
-minhaMaratona.adicionarFilme(new Filme("Shrek", "Animação", 90));
 
-console.log("Filmes de Fantasia:", minhaMaratona.obterTitulosPorGenero("Fantasia"));
+const minhaMaratona = new Maratona();
+
+minhaMaratona.adicionarFilme(
+  new Filme("Senhor dos Anéis", "Fantasia", 180)
+);
+
+minhaMaratona.adicionarFilme(
+  new Filme("Matrix", "Ficção Científica", 136)
+);
+
+minhaMaratona.adicionarFilme(
+  new Filme("O Hobbit", "Fantasia", 169)
+);
+
+minhaMaratona.adicionarFilme(
+  new Filme("Shrek", "Animação", 90)
+);
+
+console.log(
+  "Filmes de Fantasia:",
+  minhaMaratona.obterTitulosPorGenero("Fantasia")
+);
 // Esperado: [ 'Senhor dos Anéis', 'O Hobbit' ]
 
-console.log("Tempo total da maratona (minutos):", minhaMaratona.calcularTempoTotal());
+console.log(
+  "Tempo total da maratona (minutos):",
+  minhaMaratona.calcularTempoTotal()
+);
 // Esperado: 575
 
-console.log(minhaMaratona.buscarFilmePorTitulo("Shrek"))
+console.log(
+  minhaMaratona.buscarFilmePorTitulo("Shrek")
+);
 // Esperado: { titulo: 'Shrek', genero: 'Animação', duracao: 90 }
 
-console.log(minhaMaratona.temFilmeLongo(150))
-// Esperado: True
+console.log(
+  minhaMaratona.temFilmeLongo(150)
+);
+// Esperado: true
 
-console.log(minhaMaratona.todosSaoCurtos(200))
-// Esperado: True
+console.log(
+  minhaMaratona.todosSaoCurtos(200)
+);
+// Esperado: true
 
-console.log(minhaMaratona.todosSaoCurtos(150))
-// Esperado: False
+console.log(
+  minhaMaratona.todosSaoCurtos(150)
+);
+// Esperado: false
 
-console.log("Tempo total de Fantasia:", minhaMaratona.calcularTempoPorGenero("Fantasia"));
-// Esperado: 349 (pois Senhor dos Anéis tem 180 e O Hobbit tem 169)
+console.log(
+  "Tempo total de Fantasia:",
+  minhaMaratona.calcularTempoPorGenero("Fantasia")
+);
+// Esperado: 349
 
-console.log("Filmes ordenados por duração", minhaMaratona.ordenarFilmesPorDuracao())
+console.log(
+  "Filmes ordenados por duração:",
+  minhaMaratona.ordenarFilmesPorDuracao()
+);
 
-console.log(  "Duração total dos filmes de Ação:", minhaMaratona.calcularDuracaoPorGenero("Ação"));
+console.log(
+  "Duração total dos filmes de Ação:",
+  minhaMaratona.calcularDuracaoPorGenero("Ação")
+);
+// Esperado: 0
 
-console.log(minhaMaratona.obterFilmeMaisLongo())
+console.log(
+  "Filme mais longo:",
+  minhaMaratona.obterFilmeMaisLongo()
+);
 
-console.log("Posição de O Hobbit:", minhaMaratona.verificarPosicaoNaFila("O Hobbit"));
-// Esperado: 2 (pois é o terceiro filme adicionado, posições: 0, 1, 2)
+console.log(
+  "Posição de O Hobbit:",
+  minhaMaratona.verificarPosicaoNaFila("O Hobbit")
+);
+// Esperado: 2
 
-console.log("Posição de Vingadores:", minhaMaratona.verificarPosicaoNaFila("Vingadores"));
-// Esperado: -1 (filme não existe na lista)
+console.log(
+  "Posição de Vingadores:",
+  minhaMaratona.verificarPosicaoNaFila("Vingadores")
+);
+// Esperado: -1
+
+console.log(
+  "Duração média dos filmes:",
+  minhaMaratona.calcularDuracaoMedia()
+);
+// Esperado: 143.75 minutos
