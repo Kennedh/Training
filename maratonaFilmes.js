@@ -170,6 +170,20 @@ class Maratona {
       return contagem;
     }, {});
   }
+  // ==========================================
+  // DESAFIO 13: filter + sort + map
+  // ==========================================
+  obterTitulosPorGeneroOrdenados(generoBuscado) {
+    // TODO:
+    // 1. Filtre os filmes que tenham o gênero informado.
+    // 2. Ordene os filmes do mais longo para o mais curto.
+    // 3. Retorne apenas os títulos, mantendo essa ordem.
+
+    return this.filmes
+      .filter(filme => filme.genero === generoBuscado)
+      .sort((a, b) => b.duracao - a.duracao)
+      .map(filme => filme.titulo);
+  }
 }
 
 // ---------------------------------------------------------
@@ -282,3 +296,27 @@ console.log(
   new Maratona().contarFilmesPorGenero()
 );
 // Esperado: {}
+
+console.log(
+  "Filmes de Fantasia do mais longo para o mais curto:",
+  minhaMaratona.obterTitulosPorGeneroOrdenados("Fantasia")
+);
+// Esperado: [ 'Senhor dos Anéis', 'O Hobbit' ]
+
+console.log(
+  "Filmes de Animação:",
+  minhaMaratona.obterTitulosPorGeneroOrdenados("Animação")
+);
+// Esperado: [ 'Shrek' ]
+
+console.log(
+  "Filmes de Ação:",
+  minhaMaratona.obterTitulosPorGeneroOrdenados("Ação")
+);
+// Esperado: []
+
+console.log(
+  "Resultado em uma maratona vazia:",
+  new Maratona().obterTitulosPorGeneroOrdenados("Fantasia")
+);
+// Esperado: []
