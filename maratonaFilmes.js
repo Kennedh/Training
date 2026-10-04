@@ -155,6 +155,21 @@ class Maratona {
 
     return tempoTotal / this.filmes.length;
   }
+  // ==========================================
+  // DESAFIO 12: reduce + contagem por gênero
+  // ==========================================
+  contarFilmesPorGenero() {
+    // TODO:
+    // 1. Use o .reduce() para criar um objeto.
+    // 2. Cada chave será um gênero.
+    // 3. Cada valor será a quantidade de filmes daquele gênero.
+    // Exemplo: { Fantasia: 2, Animação: 1 }
+
+    return this.filmes.reduce((contagem, filme) => {
+      contagem[filme.genero] = (contagem[filme.genero] || 0) + 1;
+      return contagem;
+    }, {});
+  }
 }
 
 // ---------------------------------------------------------
@@ -250,3 +265,20 @@ console.log(
   minhaMaratona.calcularDuracaoMedia()
 );
 // Esperado: 143.75 minutos
+
+console.log(
+  "Quantidade de filmes por gênero:",
+  minhaMaratona.contarFilmesPorGenero()
+);
+// Esperado:
+// {
+//   'Animação': 1,
+//   'Ficção Científica': 1,
+//   'Fantasia': 2
+// }
+
+console.log(
+  "Contagem em uma maratona vazia:",
+  new Maratona().contarFilmesPorGenero()
+);
+// Esperado: {}
