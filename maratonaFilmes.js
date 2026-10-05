@@ -184,6 +184,22 @@ class Maratona {
       .sort((a, b) => b.duracao - a.duracao)
       .map(filme => filme.titulo);
   }
+    // ==========================================
+  // DESAFIO 14: sort + slice + map
+  // ==========================================
+  obterTitulosMaisLongos(quantidade) {
+    // TODO:
+    // 1. Crie uma cópia da lista para preservar a ordem original.
+    // 2. Ordene os filmes do mais longo para o mais curto.
+    // 3. Selecione apenas a quantidade de filmes solicitada.
+    // 4. Retorne apenas os títulos desses filmes.
+    // Considere que 'quantidade' será um inteiro maior ou igual a zero.
+
+    return [...this.filmes]
+      .sort((a, b) => b.duracao - a.duracao)
+      .slice(0, quantidade)
+      .map(filme => filme.titulo);
+  }
 }
 
 // ---------------------------------------------------------
@@ -318,5 +334,35 @@ console.log(
 console.log(
   "Resultado em uma maratona vazia:",
   new Maratona().obterTitulosPorGeneroOrdenados("Fantasia")
+);
+// Esperado: []
+
+console.log(
+  "Os dois filmes mais longos:",
+  minhaMaratona.obterTitulosMaisLongos(2)
+);
+// Esperado: [ 'Senhor dos Anéis', 'O Hobbit' ]
+
+console.log(
+  "O filme mais longo:",
+  minhaMaratona.obterTitulosMaisLongos(1)
+);
+// Esperado: [ 'Senhor dos Anéis' ]
+
+console.log(
+  "Quantidade maior que o total de filmes:",
+  minhaMaratona.obterTitulosMaisLongos(10)
+);
+// Esperado: [ 'Senhor dos Anéis', 'O Hobbit', 'Matrix', 'Shrek' ]
+
+console.log(
+  "Nenhum filme solicitado:",
+  minhaMaratona.obterTitulosMaisLongos(0)
+);
+// Esperado: []
+
+console.log(
+  "Resultado em uma maratona vazia:",
+  new Maratona().obterTitulosMaisLongos(2)
 );
 // Esperado: []
