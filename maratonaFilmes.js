@@ -200,6 +200,35 @@ class Maratona {
       .slice(0, quantidade)
       .map(filme => filme.titulo);
   }
+    // ==========================================
+  // DESAFIO 15: filter + includes + map
+  // ==========================================
+  buscarTitulosPorTermo(termoBuscado) {
+    // TODO:
+    // 1. Percorra os filmes e filtre aqueles cujo título contenha
+    //    o texto informado em 'termoBuscado'.
+    // 2. A busca deve ignorar letras maiúsculas e minúsculas.
+    // 3. Retorne apenas os títulos dos filmes encontrados.
+    //
+    // Exemplo:
+    // buscarTitulosPorTermo("hobbit")
+    // Resultado: [ 'O Hobbit' ]
+    //
+    // Dica:
+    // Você pode usar:
+    // .toLowerCase()
+    // .includes()
+    // .filter()
+    // .map()
+
+    const termo = termoBuscado.toLowerCase();
+
+    return this.filmes
+      .filter(filme =>
+        filme.titulo.toLowerCase().includes(termo)
+      )
+      .map(filme => filme.titulo);
+  }
 }
 
 // ---------------------------------------------------------
@@ -364,5 +393,41 @@ console.log(
 console.log(
   "Resultado em uma maratona vazia:",
   new Maratona().obterTitulosMaisLongos(2)
+);
+// Esperado: []
+
+console.log(
+  "Busca por 'hobbit':",
+  minhaMaratona.buscarTitulosPorTermo("hobbit")
+);
+// Esperado: [ 'O Hobbit' ]
+
+console.log(
+  "Busca por 'HOBBIT' ignorando maiúsculas/minúsculas:",
+  minhaMaratona.buscarTitulosPorTermo("HOBBIT")
+);
+// Esperado: [ 'O Hobbit' ]
+
+console.log(
+  "Busca por 'matrix':",
+  minhaMaratona.buscarTitulosPorTermo("matrix")
+);
+// Esperado: [ 'Matrix' ]
+
+console.log(
+  "Busca por 'senhor':",
+  minhaMaratona.buscarTitulosPorTermo("senhor")
+);
+// Esperado: [ 'Senhor dos Anéis' ]
+
+console.log(
+  "Busca por filme inexistente:",
+  minhaMaratona.buscarTitulosPorTermo("vingadores")
+);
+// Esperado: []
+
+console.log(
+  "Busca em maratona vazia:",
+  new Maratona().buscarTitulosPorTermo("matrix")
 );
 // Esperado: []
