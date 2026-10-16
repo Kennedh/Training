@@ -229,6 +229,22 @@ class Maratona {
       )
       .map(filme => filme.titulo);
   }
+  // ==========================================
+  // DESAFIO 16: filter + intervalo + map
+  // ==========================================
+  obterTitulosPorFaixaDeDuracao(tempoMinimo, tempoMaximo) {
+    // TODO:
+    // 1. Filtre os filmes cuja duração esteja entre o tempo mínimo
+    //    e o tempo máximo, incluindo os dois limites.
+    // 2. Retorne apenas os títulos dos filmes encontrados.
+
+    return this.filmes
+      .filter(filme =>
+        filme.duracao >= tempoMinimo &&
+        filme.duracao <= tempoMaximo
+      )
+      .map(filme => filme.titulo);
+  }
 }
 
 // ---------------------------------------------------------
@@ -431,3 +447,9 @@ console.log(
   new Maratona().buscarTitulosPorTermo("matrix")
 );
 // Esperado: []
+
+console.log(
+  "Filmes com duração entre 90 e 140 minutos:",
+  minhaMaratona.obterTitulosPorFaixaDeDuracao(90, 140)
+);
+// Esperado: [ 'Shrek', 'Matrix' ]
