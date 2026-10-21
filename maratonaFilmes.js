@@ -229,6 +229,28 @@ class Maratona {
       )
       .map(filme => filme.titulo);
   }
+
+  
+  // ==========================================
+  // DESAFIO 16: filter + sort + map
+  // ==========================================
+  buscarFilmesPorDuracao(tempoMinimo, tempoMaximo) {
+    // TODO:
+    // 1. Filtre os filmes cuja duração esteja entre
+    //    'tempoMinimo' e 'tempoMaximo', inclusive.
+    // 2. Ordene os filmes do mais curto para o mais longo.
+    // 3. Retorne apenas os títulos dos filmes.
+    // 4. Preserve a ordem original da lista.
+
+    return this.filmes
+      .filter(filme =>
+        filme.duracao >= tempoMinimo &&
+        filme.duracao <= tempoMaximo
+      )
+      .sort((a, b) => a.duracao - b.duracao)
+      .map(filme => filme.titulo);
+  }
+
 }
 
 // ---------------------------------------------------------
@@ -429,5 +451,30 @@ console.log(
 console.log(
   "Busca em maratona vazia:",
   new Maratona().buscarTitulosPorTermo("matrix")
+);
+// Esperado: []
+
+
+console.log(
+  "Filmes entre 90 e 140 minutos:",
+  minhaMaratona.buscarFilmesPorDuracao(90, 140)
+);
+// Esperado: [ 'Shrek', 'Matrix' ]
+
+console.log(
+  "Filmes entre 150 e 180 minutos:",
+  minhaMaratona.buscarFilmesPorDuracao(150, 180)
+);
+// Esperado: [ 'O Hobbit', 'Senhor dos Anéis' ]
+
+console.log(
+  "Filmes entre 100 e 120 minutos:",
+  minhaMaratona.buscarFilmesPorDuracao(100, 120)
+);
+// Esperado: []
+
+console.log(
+  "Resultado em uma maratona vazia:",
+  new Maratona().buscarFilmesPorDuracao(90, 180)
 );
 // Esperado: []
