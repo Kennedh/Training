@@ -250,6 +250,19 @@ class Maratona {
       .sort((a, b) => a.duracao - b.duracao)
       .map(filme => filme.titulo);
   }
+    // ==========================================
+  // DESAFIO 17: map + Set
+  // ==========================================
+  obterGenerosDisponiveis() {
+    // TODO:
+    // 1. Use o .map() para obter os gêneros dos filmes.
+    // 2. Use um Set para eliminar os gêneros repetidos.
+    // 3. Converta o Set em um array usando [...].
+
+    return [...new Set(
+      this.filmes.map(filme => filme.genero)
+    )];
+  }
 
 }
 
@@ -478,3 +491,9 @@ console.log(
   new Maratona().buscarFilmesPorDuracao(90, 180)
 );
 // Esperado: []
+
+console.log(
+  "Gêneros disponíveis:",
+  minhaMaratona.obterGenerosDisponiveis()
+);
+// Esperado: [ 'Animação', 'Ficção Científica', 'Fantasia' ]
