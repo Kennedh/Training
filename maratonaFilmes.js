@@ -263,6 +263,19 @@ class Maratona {
       this.filmes.map(filme => filme.genero)
     )];
   }
+  // ==========================================
+  // DESAFIO 18: map + join
+  // ==========================================
+  gerarResumoDosFilmes() {
+    // TODO:
+    // 1. Use o .map() para transformar cada filme em um texto
+    //    no formato "Título (duração min)".
+    // 2. Use o .join() para unir os textos com " | ".
+
+    return this.filmes
+      .map(filme => `${filme.titulo} (${filme.duracao} min)`)
+      .join(" | ");
+  }
 
 }
 
@@ -497,3 +510,10 @@ console.log(
   minhaMaratona.obterGenerosDisponiveis()
 );
 // Esperado: [ 'Animação', 'Ficção Científica', 'Fantasia' ]
+
+console.log(
+  "Resumo dos filmes:",
+  minhaMaratona.gerarResumoDosFilmes()
+);
+// Esperado:
+// Shrek (90 min) | Matrix (136 min) | O Hobbit (169 min) | Senhor dos Anéis (180 min)
