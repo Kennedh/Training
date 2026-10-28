@@ -295,6 +295,22 @@ class Maratona {
       return grupos;
     }, {});
   }
+  // ==========================================
+  // DESAFIO 20: reutilização de método + cálculo
+  // ==========================================
+  obterTempoFormatado() {
+    // TODO:
+    // 1. Reutilize calcularTempoTotal() para obter o total em minutos.
+    // 2. Calcule as horas completas usando Math.floor().
+    // 3. Use o operador % para obter os minutos restantes.
+    // 4. Retorne um texto no formato "9h 35min".
+
+    const tempoTotal = this.calcularTempoTotal();
+    const horas = Math.floor(tempoTotal / 60);
+    const minutos = tempoTotal % 60;
+
+    return `${horas}h ${minutos}min`;
+  }
 }
 
 // ---------------------------------------------------------
@@ -546,3 +562,9 @@ console.log(
 //   'Ficção Científica': [ 'Matrix' ],
 //   'Fantasia': [ 'O Hobbit', 'Senhor dos Anéis' ]
 // }
+
+console.log(
+  "Tempo total formatado:",
+  minhaMaratona.obterTempoFormatado()
+);
+// Esperado: "9h 35min"
