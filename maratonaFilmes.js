@@ -276,7 +276,25 @@ class Maratona {
       .map(filme => `${filme.titulo} (${filme.duracao} min)`)
       .join(" | ");
   }
+    // ==========================================
+  // DESAFIO 19: reduce + agrupamento
+  // ==========================================
+  agruparTitulosPorGenero() {
+    // TODO:
+    // 1. Use o .reduce() para criar um objeto.
+    // 2. Cada chave será um gênero e seu valor será um array de títulos.
+    // 3. Adicione cada título ao array do gênero correspondente.
 
+    return this.filmes.reduce((grupos, filme) => {
+      if (!grupos[filme.genero]) {
+        grupos[filme.genero] = [];
+      }
+
+      grupos[filme.genero].push(filme.titulo);
+
+      return grupos;
+    }, {});
+  }
 }
 
 // ---------------------------------------------------------
@@ -517,3 +535,14 @@ console.log(
 );
 // Esperado:
 // Shrek (90 min) | Matrix (136 min) | O Hobbit (169 min) | Senhor dos Anéis (180 min)
+
+console.log(
+  "Títulos agrupados por gênero:",
+  minhaMaratona.agruparTitulosPorGenero()
+);
+// Esperado:
+// {
+//   'Animação': [ 'Shrek' ],
+//   'Ficção Científica': [ 'Matrix' ],
+//   'Fantasia': [ 'O Hobbit', 'Senhor dos Anéis' ]
+// }
