@@ -311,6 +311,26 @@ class Maratona {
 
     return `${horas}h ${minutos}min`;
   }
+  // ==========================================
+  // DESAFIO 21: reutilização + filter + map
+  // ==========================================
+  obterTitulosAcimaDaMedia() {
+    // TODO:
+    // 1. Reutilize calcularDuracaoMedia() para obter a média.
+    // 2. Filtre os filmes com duração maior que a média.
+    // 3. Retorne apenas os títulos desses filmes.
+    // 4. Se a lista estiver vazia, retorne [].
+
+    if (this.filmes.length === 0) {
+      return [];
+    }
+
+    const media = this.calcularDuracaoMedia();
+
+    return this.filmes
+      .filter(filme => filme.duracao > media)
+      .map(filme => filme.titulo);
+  }
 }
 
 // ---------------------------------------------------------
@@ -568,3 +588,9 @@ console.log(
   minhaMaratona.obterTempoFormatado()
 );
 // Esperado: "9h 35min"
+
+console.log(
+  "Filmes com duração acima da média:",
+  minhaMaratona.obterTitulosAcimaDaMedia()
+);
+// Esperado: [ 'O Hobbit', 'Senhor dos Anéis' ]
